@@ -20,5 +20,7 @@ namespace Repository
         public Task<List<PartialPaymentOrder>> GetPartialPaymentOrder(); 
         public Task<List<Agent>> GetAgent(); 
         public Task<List<RendedServicesVariations>> GetRendedServicesVariations(); 
+        public Task<List<ActVariationsOfCompletion>> GetActVariationsOfCompletions(); 
+        public Task<List<AgreementEntity>> GetAgreementEntities(); 
     }
 }

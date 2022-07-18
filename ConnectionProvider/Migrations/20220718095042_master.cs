@@ -9,12 +9,25 @@ namespace ConnectionProvider.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ActVariationsOfCompletions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Variation = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActVariationsOfCompletions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Agents",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AgentName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AgentLocation = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,6 +45,19 @@ namespace ConnectionProvider.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AgreementConcluders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AgreementEntities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EntityName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AgreementEntities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -223,19 +249,101 @@ namespace ConnectionProvider.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Roles",
-                columns: new[] { "Id", "RoleName" },
-                values: new object[] { 1, "User" });
+                table: "ActVariationsOfCompletions",
+                columns: new[] { "Id", "Variation" },
+                values: new object[,]
+                {
+                    { 1, "Качество оказанных Услуг соответствует предъявленным требованиям" },
+                    { 2, "В результате осмотра результата оказанных Услуг недостатки не выявлены" },
+                    { 3, "В результате осмотра выявлены следующие недостатки" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Agents",
+                columns: new[] { "Id", "AgentLocation" },
+                values: new object[,]
+                {
+                    { 1, "Aгент находится в Душанбе " },
+                    { 2, "Агент находится в Худжанде" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AgreementConcluders",
+                columns: new[] { "Id", "ConcluderName" },
+                values: new object[,]
+                {
+                    { 1, "Договор заключает головной офис" },
+                    { 2, "Договор заключает филиал Банка в г. Душанбе" },
+                    { 3, "Договор заключает филиал Банка в г. Худжанде" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AgreementEntities",
+                columns: new[] { "Id", "EntityName" },
+                values: new object[,]
+                {
+                    { 1, "Юридическое лицо" },
+                    { 2, "Индивидуальный предприниматель" },
+                    { 3, "Физическое лицо" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Citizenships",
+                columns: new[] { "Id", "CitizenshipName" },
+                values: new object[] { 1, "Шахрванди Чумхурии Точикистон" });
+
+            migrationBuilder.InsertData(
+                table: "City",
+                columns: new[] { "Id", "CityName" },
+                values: new object[] { 1, "г. Душанбе" });
+
+            migrationBuilder.InsertData(
+                table: "PassportTypes",
+                columns: new[] { "Id", "PassportTypeName" },
+                values: new object[] { 1, "Шиноснома" });
+
+            migrationBuilder.InsertData(
+                table: "RendedServicesVariations",
+                columns: new[] { "Id", "RendedServiceName" },
+                values: new object[,]
+                {
+                    { 1, "Головной - улица Багауддинова" },
+                    { 2, "Филиал в Душанбе - улица Ниёзи" },
+                    { 3, "Филиал в Худжанде - улицу не помню" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "RoleName" },
-                values: new object[] { 2, "Editor" });
+                values: new object[,]
+                {
+                    { 1, "User" },
+                    { 2, "Editor" },
+                    { 3, "Admin" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Roles",
-                columns: new[] { "Id", "RoleName" },
-                values: new object[] { 3, "Admin" });
+                table: "Services",
+                columns: new[] { "Id", "ServiceName" },
+                values: new object[,]
+                {
+                    { 1, "Услуга указывается в самом договоре" },
+                    { 2, "Услуга указывается в приложении к Договору" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StructuralSubdivisions",
+                columns: new[] { "Id", "SubdivisionName" },
+                values: new object[] { 1, "Филиали Ҷамъияти саҳомии кушодаи..." });
+
+            migrationBuilder.InsertData(
+                table: "TrustieFoundations",
+                columns: new[] { "Id", "FoundationName" },
+                values: new object[,]
+                {
+                    { 1, "Доверенность" },
+                    { 2, "Устав" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubCategories_CategoryId",
@@ -251,10 +359,16 @@ namespace ConnectionProvider.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ActVariationsOfCompletions");
+
+            migrationBuilder.DropTable(
                 name: "Agents");
 
             migrationBuilder.DropTable(
                 name: "AgreementConcluders");
+
+            migrationBuilder.DropTable(
+                name: "AgreementEntities");
 
             migrationBuilder.DropTable(
                 name: "Citizenships");

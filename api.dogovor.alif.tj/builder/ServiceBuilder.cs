@@ -24,7 +24,7 @@ namespace api.dogovor.alif.tj.builder
             Services.AddScoped<ICategoryAndSubCategoryRepository, CategoryAndSubCategoryRepository>();
             Services.AddScoped<ICategoryAndSubCategoryServices, CategoryAndSubCategoryServices>();
             Services.AddScoped<IDropDownLists, DropDownLists>();
-            Services.AddScoped<IDropDownListServices, DropDowns>();
+            Services.AddScoped<IDropDowns, DropDowns>();
         }
         public static void AddAuthentication(this IServiceCollection Services, WebApplicationBuilder builder)
         {

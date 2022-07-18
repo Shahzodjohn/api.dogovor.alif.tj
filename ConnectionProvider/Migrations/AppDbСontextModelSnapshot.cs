@@ -64,6 +64,40 @@ namespace ConnectionProvider.Migrations
                     b.ToTable("SubCategories");
                 });
 
+            modelBuilder.Entity("Entity.Entities.ActVariationsOfCompletion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Variation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActVariationsOfCompletions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Variation = "Качество оказанных Услуг соответствует предъявленным требованиям"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Variation = "В результате осмотра результата оказанных Услуг недостатки не выявлены"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Variation = "В результате осмотра выявлены следующие недостатки"
+                        });
+                });
+
             modelBuilder.Entity("Entity.Entities.Agent", b =>
                 {
                     b.Property<int>("Id")
@@ -72,13 +106,25 @@ namespace ConnectionProvider.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("AgentName")
+                    b.Property<string>("AgentLocation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Agents");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AgentLocation = "Aгент находится в Душанбе "
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AgentLocation = "Агент находится в Худжанде"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Entities.AgreementConcluder", b =>
@@ -96,6 +142,57 @@ namespace ConnectionProvider.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AgreementConcluders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcluderName = "Договор заключает головной офис"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcluderName = "Договор заключает филиал Банка в г. Душанбе"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcluderName = "Договор заключает филиал Банка в г. Худжанде"
+                        });
+                });
+
+            modelBuilder.Entity("Entity.Entities.AgreementEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("EntityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AgreementEntities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EntityName = "Юридическое лицо"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EntityName = "Индивидуальный предприниматель"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EntityName = "Физическое лицо"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Entities.Citizenship", b =>
@@ -113,6 +210,13 @@ namespace ConnectionProvider.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Citizenships");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CitizenshipName = "Шахрванди Чумхурии Точикистон"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Entities.City", b =>
@@ -130,6 +234,13 @@ namespace ConnectionProvider.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("City");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CityName = "г. Душанбе"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Entities.PartialPaymentOrder", b =>
@@ -164,6 +275,13 @@ namespace ConnectionProvider.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PassportTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PassportTypeName = "Шиноснома"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Entities.PaymentOrder", b =>
@@ -198,6 +316,23 @@ namespace ConnectionProvider.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RendedServicesVariations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            RendedServiceName = "Головной - улица Багауддинова"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            RendedServiceName = "Филиал в Душанбе - улица Ниёзи"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            RendedServiceName = "Филиал в Худжанде - улицу не помню"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Entities.Services", b =>
@@ -215,6 +350,18 @@ namespace ConnectionProvider.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Services");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ServiceName = "Услуга указывается в самом договоре"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ServiceName = "Услуга указывается в приложении к Договору"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Entities.StructuralSubdivision", b =>
@@ -232,6 +379,13 @@ namespace ConnectionProvider.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("StructuralSubdivisions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            SubdivisionName = "Филиали Ҷамъияти саҳомии кушодаи..."
+                        });
                 });
 
             modelBuilder.Entity("Entity.Entities.TrustieFoundation", b =>
@@ -249,6 +403,18 @@ namespace ConnectionProvider.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TrustieFoundations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FoundationName = "Доверенность"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FoundationName = "Устав"
+                        });
                 });
 
             modelBuilder.Entity("Entity.User.Role", b =>

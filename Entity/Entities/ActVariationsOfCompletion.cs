@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entity.Entities
 {
-    public class Agent
+    public class ActVariationsOfCompletion
     {
         public int Id { get; set; }
-        public string AgentLocation { get; set; }
+        public string Variation { get; set; }
     }
 }

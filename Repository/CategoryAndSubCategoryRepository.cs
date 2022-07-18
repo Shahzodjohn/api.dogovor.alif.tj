@@ -46,7 +46,9 @@ namespace Repository
         public async Task<SubCategory> GetSubCategory(int Id)
         {
             var subcategory = await _context.SubCategories.FindAsync(Id);
-            return subcategory;
+            if (subcategory != null)
+                return subcategory;
+            else return null;
         }
 
         public async Task<string> GetSubCategoryFile(int Id)

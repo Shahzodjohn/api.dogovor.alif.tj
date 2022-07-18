@@ -72,5 +72,15 @@ namespace Repository
         {
             return await _context.TrustieFoundations.ToListAsync();
         }
+
+        public async Task<List<ActVariationsOfCompletion>> GetActVariationsOfCompletions()
+        {
+            return await _context.ActVariationsOfCompletions.ToListAsync();
+        }
+
+        public async Task<List<AgreementEntity>> GetAgreementEntities()
+        {
+            return await _context.AgreementEntities.ToListAsync();
+        }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IDropDownListService
 {
-    public interface IDropDownListServices
+    public interface IDropDowns
     {
         public Task<List<City>> GetCityList();
         public Task<List<StructuralSubdivision>> GetStructuralSubdivision();
@@ -20,5 +20,7 @@ namespace IDropDownListService
         public Task<List<PartialPaymentOrder>> GetPartialPaymentOrder();
         public Task<List<Agent>> GetAgent();
         public Task<List<RendedServicesVariations>> GetRendedServicesVariations();
+        public Task<List<ActVariationsOfCompletion>> GetActVariationsOfCompletions();
+        public Task<List<AgreementEntity>> GetAgreementEntities();
     }
 }

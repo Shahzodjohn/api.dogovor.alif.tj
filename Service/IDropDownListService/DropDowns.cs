@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Service.IDropDownListService
 {
-    public class DropDowns : IDropDownListServices
+    public class DropDowns : IDropDowns
     {
         private readonly IDropDownLists _list;
 
@@ -175,6 +175,36 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetTrustieFoundation();
+                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+            }
+            catch (Exception ex)
+            {
+                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+            }
+            return lst;
+        }
+
+        public async Task<List<ActVariationsOfCompletion>> GetActVariationsOfCompletions()
+        {
+            var lst = new List<ActVariationsOfCompletion>();
+            try
+            {
+                lst = await _list.GetActVariationsOfCompletions();
+                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+            }
+            catch (Exception ex)
+            {
+                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+            }
+            return lst;
+        }
+
+        public async Task<List<AgreementEntity>> GetAgreementEntities()
+        {
+            var lst = new List<AgreementEntity>();
+            try
+            {
+                lst = await _list.GetAgreementEntities();
                 LogProvider.GetInstance().Info("200", "Got the list of Agents");
             }
             catch (Exception ex)
