@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConnectionProvider.Migrations
 {
     [DbContext(typeof(AppDbСontext))]
-    [Migration("20220716091758_ModelsFor3contract")]
-    partial class ModelsFor3contract
+    [Migration("20220718063303_master")]
+    partial class master
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,7 +37,7 @@ namespace ConnectionProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Entity.ContractChoice.SubCategory", b =>
@@ -63,7 +63,7 @@ namespace ConnectionProvider.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("SubCategory");
+                    b.ToTable("SubCategories");
                 });
 
             modelBuilder.Entity("Entity.Entities.Agent", b =>
@@ -80,7 +80,7 @@ namespace ConnectionProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Agent");
+                    b.ToTable("Agents");
                 });
 
             modelBuilder.Entity("Entity.Entities.AgreementConcluder", b =>
@@ -97,7 +97,7 @@ namespace ConnectionProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AgreementConcluder");
+                    b.ToTable("AgreementConcluders");
                 });
 
             modelBuilder.Entity("Entity.Entities.Citizenship", b =>
@@ -114,7 +114,7 @@ namespace ConnectionProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Citizenship");
+                    b.ToTable("Citizenships");
                 });
 
             modelBuilder.Entity("Entity.Entities.City", b =>
@@ -134,7 +134,7 @@ namespace ConnectionProvider.Migrations
                     b.ToTable("City");
                 });
 
-            modelBuilder.Entity("Entity.Entities.PartialPaymentOrderName", b =>
+            modelBuilder.Entity("Entity.Entities.PartialPaymentOrder", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -148,7 +148,7 @@ namespace ConnectionProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PartialPaymentOrderName");
+                    b.ToTable("PartialPaymentOrderNames");
                 });
 
             modelBuilder.Entity("Entity.Entities.PassportType", b =>
@@ -165,7 +165,7 @@ namespace ConnectionProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PassportType");
+                    b.ToTable("PassportTypes");
                 });
 
             modelBuilder.Entity("Entity.Entities.PaymentOrder", b =>
@@ -182,7 +182,7 @@ namespace ConnectionProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentOrder");
+                    b.ToTable("PaymentOrders");
                 });
 
             modelBuilder.Entity("Entity.Entities.RendedServicesVariations", b =>
@@ -202,7 +202,7 @@ namespace ConnectionProvider.Migrations
                     b.ToTable("RendedServicesVariations");
                 });
 
-            modelBuilder.Entity("Entity.Entities.Service", b =>
+            modelBuilder.Entity("Entity.Entities.Services", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -216,7 +216,7 @@ namespace ConnectionProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Service");
+                    b.ToTable("Services");
                 });
 
             modelBuilder.Entity("Entity.Entities.StructuralSubdivision", b =>
@@ -233,7 +233,7 @@ namespace ConnectionProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StructuralSubdivision");
+                    b.ToTable("StructuralSubdivisions");
                 });
 
             modelBuilder.Entity("Entity.Entities.TrustieFoundation", b =>
@@ -250,7 +250,7 @@ namespace ConnectionProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TrustieFoundation");
+                    b.ToTable("TrustieFoundations");
                 });
 
             modelBuilder.Entity("Entity.User.Role", b =>

@@ -20,17 +20,17 @@ namespace Repository
 
         public async Task<List<Agent>> GetAgent()
         {
-            return await _context.Agent.ToListAsync();
+            return await _context.Agents.ToListAsync();
         }
 
         public async Task<List<AgreementConcluder>> GetAgreementConcluder()
         {
-            return await _context.AgreementConcluder.ToListAsync();
+            return await _context.AgreementConcluders.ToListAsync();
         }
 
         public async Task<List<Citizenship>> GetCitizenship()
         {
-           return await _context.Citizenship.ToListAsync();
+           return await _context.Citizenships.ToListAsync();
         }
 
         public async Task<List<City>> GetCityList()
@@ -40,17 +40,17 @@ namespace Repository
 
         public async Task<List<PassportType>> GetPassportType()
         {
-            return await _context.PassportType.ToListAsync();
+            return await _context.PassportTypes.ToListAsync();
         }
 
         public async Task<List<PartialPaymentOrder>> GetPartialPaymentOrder()
         {
-            return await _context.PartialPaymentOrderName.ToListAsync();
+            return await _context.PartialPaymentOrderNames.ToListAsync();
         }
 
         public async Task<List<PaymentOrder>> GetPaymentOrder()
         {
-            return await _context.PaymentOrder.ToListAsync();
+            return await _context.PaymentOrders.ToListAsync();
         }
 
         public async Task<List<RendedServicesVariations>> GetRendedServicesVariations()
@@ -65,12 +65,12 @@ namespace Repository
 
         public async Task<List<StructuralSubdivision>> GetStructuralSubdivision()
         {
-            return await _context.StructuralSubdivision.ToListAsync();
+            return await _context.StructuralSubdivisions.ToListAsync();
         }
 
         public async Task<List<TrustieFoundation>> GetTrustieFoundation()
         {
-            return await _context.TrustieFoundation.ToListAsync();
+            return await _context.TrustieFoundations.ToListAsync();
         }
     }
 }

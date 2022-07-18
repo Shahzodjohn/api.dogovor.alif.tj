@@ -162,38 +162,38 @@ namespace api.dogovor.alif.tj.Controllers
         //    #endregion
         //    return Ok();
         //}
-        [HttpPost("Upload a new Contract")]
-        public async Task<IActionResult> ConvertingTextIntoRtf(IFormFile form)
-        {
-            var path = (Path.Combine(_environment.WebRootPath, $"{ DateTime.Today.ToString("D") }"));
-            if (!System.IO.Directory.Exists(path))
-                System.IO.Directory.CreateDirectory(path);
+        //[HttpPost("Upload a new Contract")]
+        //public async Task<IActionResult> ConvertingTextIntoRtf(IFormFile form)
+        //{
+        //    var path = (Path.Combine(_environment.WebRootPath, $"{ DateTime.Today.ToString("D") }"));
+        //    if (!System.IO.Directory.Exists(path))
+        //        System.IO.Directory.CreateDirectory(path);
 
-            string filePath = Path.Combine(path, form.FileName);
-            using (Stream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-                form.CopyTo(fileStream);
+        //    string filePath = Path.Combine(path, form.FileName);
+        //    using (Stream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+        //        form.CopyTo(fileStream);
 
-            var convertApi = new ConvertApi("S1alNMap0GwMC3zi");
-            var convert = await convertApi.ConvertAsync("docx", "rtf",
-                new ConvertApiFileParam("File", filePath)
-            );
+        //    var convertApi = new ConvertApi("S1alNMap0GwMC3zi");
+        //    var convert = await convertApi.ConvertAsync("docx", "rtf",
+        //        new ConvertApiFileParam("File", filePath)
+        //    );
 
-            var rtfFile = filePath.Replace("docx", "rtf");
-            var textFile = filePath.Replace("docx", "txt");
-            await convert.SaveFilesAsync(path);
-            if(!System.IO.File.Exists(textFile))
-                System.IO.File.Move(rtfFile, Path.ChangeExtension(rtfFile, ".txt"));
-            else if(System.IO.File.Exists(textFile))
-                System.IO.File.Delete(textFile);
-            var finaltext = System.IO.File.ReadAllText(textFile);
+        //    var rtfFile = filePath.Replace("docx", "rtf");
+        //    var textFile = filePath.Replace("docx", "txt");
+        //    await convert.SaveFilesAsync(path);
+        //    if(!System.IO.File.Exists(textFile))
+        //        System.IO.File.Move(rtfFile, Path.ChangeExtension(rtfFile, ".txt"));
+        //    else if(System.IO.File.Exists(textFile))
+        //        System.IO.File.Delete(textFile);
+        //    var finaltext = System.IO.File.ReadAllText(textFile);
             
 
-            string text = "sdads";
+        //    string text = "sdads";
             
 
              
-            return Ok();
-        }
+        //    return Ok();
+        //}
         
        
     }

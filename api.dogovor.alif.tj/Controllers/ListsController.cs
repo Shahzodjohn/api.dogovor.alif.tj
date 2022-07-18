@@ -12,7 +12,7 @@ namespace api.dogovor.alif.tj.Controllers
             _list = list;
         }
 
-        [HttpGet("GetAgentList")]
+        [HttpGet("GetAgentList  ")]
         public async Task<IActionResult> GetAgentList()
         {
             return Ok(await _list.GetAgent());

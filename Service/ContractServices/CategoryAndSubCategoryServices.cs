@@ -23,6 +23,21 @@ namespace Service.ContractServices
             _subCategoryRepository = subCategoryRepository;
         }
 
+        public async Task<Response> CreateCategory(CategoryDTO dto)
+        {
+            try
+            {
+                var category = await _subCategoryRepository.CreateCategory(dto);
+                if(category == null)
+                    return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest };
+               return new Response { StatusCode = System.Net.HttpStatusCode.OK };
+            }
+            catch (Exception ex)
+            {
+                return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = ex.Message  };
+            }
+        }
+
         public async Task<Response> CreateSubCategory(SubCategoryDTO dto, string path)
         {
             try
@@ -35,8 +50,7 @@ namespace Service.ContractServices
 
                 var convertApi = new ConvertApi("S1alNMap0GwMC3zi");
                 var convert = await convertApi.ConvertAsync("docx", "rtf",
-                    new ConvertApiFileParam("File", filePath)
-                );
+                    new ConvertApiFileParam("File", filePath));
 
                 var rtfFile = filePath.Replace("docx", "rtf");
                 var textFile = filePath.Replace("docx", "txt");
@@ -52,7 +66,6 @@ namespace Service.ContractServices
                     SampleInstance = finaltext,
                     CategoryId = dto.CategoryId
                 };
-
                 var insertResponse = await _subCategoryRepository.CreateSubCategory(subCategory);
                 System.IO.DirectoryInfo di = new DirectoryInfo(path);
 
@@ -64,12 +77,41 @@ namespace Service.ContractServices
                 {
                     dir.Delete(true);
                 }
+                LogProvider.GetInstance().Info("200", "Successfull process!");
             }
             catch (Exception ex)
             {
                 LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = ex.Message };
             }
-            return new Response { Status = "200", Message = "ok"};
+            return new Response { StatusCode = System.Net.HttpStatusCode.OK };
+        }
+
+        public async Task<Response> GetSubCategory(int Id)
+        {
+            try
+            {
+                var subcategory = await _subCategoryRepository.GetSubCategory(Id);
+                LogProvider.GetInstance().Info("200", "Successfull process!");
+                return new Response { StatusCode = System.Net.HttpStatusCode.OK };
+            }
+            catch (Exception ex)
+            {
+                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = ex.Message };
+            }
+        }
+
+        public async Task<Response> GetSubCategoryFile(int Id)
+        {
+            var fileString = await _subCategoryRepository.GetSubCategoryFile(Id);
+            if(fileString == null)
+            {
+                LogProvider.GetInstance().Error("400", "File not found!");
+                return new Response { StatusCode = System.Net.HttpStatusCode.NotFound, Message = "Sub Category not found! Is it hidin' Somewhere?" };
+            }
+            LogProvider.GetInstance().Info("200", "Successfull process!");
+            return new Response { StatusCode = System.Net.HttpStatusCode.OK, Message = fileString };
         }
     }
 }

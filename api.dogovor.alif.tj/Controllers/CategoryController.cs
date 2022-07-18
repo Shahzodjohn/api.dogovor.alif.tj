@@ -14,15 +14,13 @@ namespace api.dogovor.alif.tj.Controllers
     {
         private readonly ICategoryAndSubCategoryServices _categoryAndSubCategoryServices;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly AppDbСontext _context;
 
-        public CategoryController(ICategoryAndSubCategoryServices categoryAndSubCategoryServices, IWebHostEnvironment webHostEnvironment, AppDbСontext context)
+        public CategoryController(ICategoryAndSubCategoryServices categoryAndSubCategoryServices, IWebHostEnvironment webHostEnvironment)
         {
             _categoryAndSubCategoryServices = categoryAndSubCategoryServices;
             _webHostEnvironment = webHostEnvironment;
-            _context = context;
         }
-        [HttpPost("CreateSubCategory")]
+        [HttpPost("Create SubCategory")]
         public async Task<IActionResult> CreateSubCategory([FromForm] SubCategoryDTO dto)
         {
             var path = (Path.Combine(_webHostEnvironment.WebRootPath, $"{ DateTime.Today.ToString("D") }"));
@@ -30,23 +28,30 @@ namespace api.dogovor.alif.tj.Controllers
             return Ok(res);
         }
 
-        [HttpGet("GetSubcategory")]
+        [HttpGet("Get a Subcategory")]
         public async Task<IActionResult> GetSubcategory(int Id)
         {
-            var subcategory = await _context.SubCategory.FindAsync(Id);
-            return Ok(subcategory.SampleInstance);
+            var subcategory = await _categoryAndSubCategoryServices.GetSubCategory(Id);
+            if (subcategory.StatusCode != System.Net.HttpStatusCode.OK)
+                return BadRequest(subcategory);
+            return Ok(subcategory.StatusCode);
         }
 
         [HttpPost("Create a category")]
         public async Task<IActionResult> CreateCategory(CategoryDTO dTO)
         {
-            var category = new Category
-            {
-                CategoryName = dTO.CategoryName,
-            };
-            await _context.Category.AddAsync(category);
-            await _context.SaveChangesAsync();
-            return Ok(category);
+            var category = await _categoryAndSubCategoryServices.CreateCategory(dTO);
+            if (category.StatusCode != System.Net.HttpStatusCode.OK)
+                return BadRequest(category);
+            return Ok(category.StatusCode);
+        }
+        [HttpGet("Get a file")]
+        public async Task<IActionResult> GetFile(int SubCategoryId)
+        {
+            var subCategoryFile = await _categoryAndSubCategoryServices.GetSubCategoryFile(SubCategoryId);
+            if (subCategoryFile.StatusCode != System.Net.HttpStatusCode.OK)
+                return NotFound();
+            return Ok(subCategoryFile.Message);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ConnectionProvider.Context;
 using Entity.ContractChoice;
+using Entity.TransferObjects;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,17 @@ namespace Repository
             _context = context;
         }
 
+        public async Task<Category> CreateCategory(CategoryDTO dto)
+        {
+            var category = new Category
+            {
+                CategoryName = dto.CategoryName,
+            };
+            await _context.Categories.AddAsync(category);
+            await _context.SaveChangesAsync();
+            return category;
+        }
+
         public async Task<SubCategory> CreateSubCategory(SubCategory subCategory)
         {
             var subCtgr = new SubCategory
@@ -26,9 +38,23 @@ namespace Repository
                   CategoryId = subCategory.CategoryId,
                    SampleInstance = subCategory.SampleInstance,
             };
-            await _context.SubCategory.AddAsync(subCtgr);
+            await _context.SubCategories.AddAsync(subCtgr);
             await _context.SaveChangesAsync();
             return subCtgr;
+        }
+
+        public async Task<SubCategory> GetSubCategory(int Id)
+        {
+            var subcategory = await _context.SubCategories.FindAsync(Id);
+            return subcategory;
+        }
+
+        public async Task<string> GetSubCategoryFile(int Id)
+        {
+            var FileString = await _context.SubCategories.FindAsync(Id);
+            if (FileString != null)
+                return FileString.SampleInstance;
+            else return null;
         }
     }
 }
