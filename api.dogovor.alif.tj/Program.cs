@@ -20,15 +20,21 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.DbConnection(connectionString);
 builder.Services.InjectedServices();
 builder.Services.AddAuthentication(builder);
-
+builder.Services.AddCors();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
+
+app.UseCors(x => x
+                .SetIsOriginAllowed(origin => true)
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
 app.UseHttpsRedirection();
 

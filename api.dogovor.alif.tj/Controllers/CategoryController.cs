@@ -1,4 +1,5 @@
 ﻿using ConnectionProvider.Context;
+using ConvertApiDotNet;
 using Entity.ContractChoice;
 using Entity.TransferObjects;
 using Microsoft.AspNetCore.Http;
@@ -20,7 +21,7 @@ namespace api.dogovor.alif.tj.Controllers
             _categoryAndSubCategoryServices = categoryAndSubCategoryServices;
             _webHostEnvironment = webHostEnvironment;
         }
-        [HttpPost("Create SubCategory")]
+        [HttpPost("CreateSubCategory")]
         public async Task<IActionResult> CreateSubCategory([FromForm] SubCategoryDTO dto)
         {
             var path = (Path.Combine(_webHostEnvironment.WebRootPath, $"{ DateTime.Today.ToString("D") }"));
@@ -28,16 +29,16 @@ namespace api.dogovor.alif.tj.Controllers
             return Ok(res);
         }
 
-        [HttpGet("Get a Subcategory")]
+        [HttpGet("GetSubcategory")]
         public async Task<IActionResult> GetSubcategory(int Id)
         {
             var subcategory = await _categoryAndSubCategoryServices.GetSubCategory(Id);
             if (subcategory.StatusCode != System.Net.HttpStatusCode.OK)
                 return BadRequest(subcategory);
-            return Ok(subcategory.StatusCode);
+            return Ok(subcategory);
         }
 
-        [HttpPost("Create a category")]
+        [HttpPost("CreateCategory")]
         public async Task<IActionResult> CreateCategory(CategoryDTO dTO)
         {
             var category = await _categoryAndSubCategoryServices.CreateCategory(dTO);
@@ -45,13 +46,23 @@ namespace api.dogovor.alif.tj.Controllers
                 return BadRequest(category);
             return Ok(category.StatusCode);
         }
-        [HttpGet("Get a file")]
+        [HttpGet("GetFile")]
         public async Task<IActionResult> GetFile(int SubCategoryId)
         {
             var subCategoryFile = await _categoryAndSubCategoryServices.GetSubCategoryFile(SubCategoryId);
             if (subCategoryFile.StatusCode != System.Net.HttpStatusCode.OK)
                 return NotFound();
             return Ok(subCategoryFile.Message);
+        }
+        
+        [HttpPost("ReceiveFinalText")]
+        public async Task<IActionResult> ReceiveFinalText([FromForm] TextDTO dto)
+        {
+            var path = (Path.Combine(_webHostEnvironment.WebRootPath, $"{ DateTime.Today.ToString("D") }"));
+            var response = await _categoryAndSubCategoryServices.ReceiveFinalText(dto, path);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                return Ok(response);
+            return BadRequest(response);
         }
     }
 }

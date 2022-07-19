@@ -92,8 +92,12 @@ namespace Service.ContractServices
             try
             {
                 var subcategory = await _subCategoryRepository.GetSubCategory(Id);
-                LogProvider.GetInstance().Info("200", "Successfull process!");
-                return new Response { StatusCode = System.Net.HttpStatusCode.OK };
+                if (subcategory != null)
+                {
+                    LogProvider.GetInstance().Info("200", "Successfull process!");
+                    return new Response { StatusCode = System.Net.HttpStatusCode.OK };
+                }
+                else return new Response { StatusCode = System.Net.HttpStatusCode.NotFound };
             }
             catch (Exception ex)
             {
@@ -112,6 +116,50 @@ namespace Service.ContractServices
             }
             LogProvider.GetInstance().Info("200", "Successfull process!");
             return new Response { StatusCode = System.Net.HttpStatusCode.OK, Message = fileString };
+        }
+
+        public async Task<Response> ReceiveFinalText(TextDTO dto, string path)
+        {
+            try
+            {
+                if (!System.IO.Directory.Exists(path))
+                    System.IO.Directory.CreateDirectory(path);
+
+                var fileName = Path.Combine(path, $"{dto.ContractName}.txt");
+                if (System.IO.File.Exists(fileName))
+                    System.IO.File.Delete(fileName);
+
+                FileStream fs = System.IO.File.Create(fileName);
+                    fs.Dispose();
+
+                using (StreamWriter writer = System.IO.File.AppendText(fileName))
+                    writer.WriteLine(dto.RTFtext);
+
+                System.IO.File.Move(fileName, Path.ChangeExtension(fileName, ".rtf"));
+
+                fileName = fileName.Replace("txt", "rtf");
+                
+                var convertApi = new ConvertApi("S1alNMap0GwMC3zi");
+                var convert = await convertApi.ConvertAsync("rtf", $"{dto.Format}", new ConvertApiFileParam("File", fileName));
+                await convert.SaveFilesAsync(path);
+                
+                
+                DirectoryInfo di = new DirectoryInfo(path);
+                FileInfo[] files = di.GetFiles("*.rtf")
+                                     .Where(p => p.Extension == ".rtf").ToArray();
+                foreach (FileInfo file in files)
+                    try
+                    {
+                        file.Attributes = FileAttributes.Normal;
+                        System.IO.File.Delete(file.FullName);
+                    }
+                    catch { }
+                return new Response { StatusCode = System.Net.HttpStatusCode.OK };
+            }
+            catch (Exception ex)
+            {
+                return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = ex.Message };
+            }
         }
     }
 }
