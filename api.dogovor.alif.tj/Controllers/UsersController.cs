@@ -3,17 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.UserService;
 using System.Security.Claims;
-using Entity;
-using GemBox.Document;
-
-using Syncfusion.DocIO;
-using Syncfusion.DocIO.DLS;
-using System.IO;
-using SautinSoft;
-using System.Diagnostics;
-using RestSharp;
-using ConvertApiDotNet;
-using System;
 using ConnectionProvider.Context;
 
 namespace api.dogovor.alif.tj.Controllers

@@ -19,7 +19,10 @@ namespace api.dogovor.alif.tj.Controllers
         private readonly IUserService _service;
         private readonly IMailService _mail;
 
-        public FinalPageController(IArchiveService archive, IWebHostEnvironment webHostEnvironment, IUserService service, IMailService mail)
+        public FinalPageController(IArchiveService archive,
+                                   IWebHostEnvironment webHostEnvironment, 
+                                   IUserService service, 
+                                   IMailService mail)
         {
             _archive = archive;
             _webHostEnvironment = webHostEnvironment;
@@ -28,7 +31,7 @@ namespace api.dogovor.alif.tj.Controllers
         }
         [HttpPost("ReturnFile")]
         [Authorize(AuthenticationSchemes = "Bearer")]
-        public async Task<IActionResult> ReturnFile(ReturnFileDTO dto)
+        public async Task<IActionResult> ReturnFile(ReturnFileDTO? dto)
         {
             var claim = User.Identity as ClaimsIdentity;
             if (claim == null) return BadRequest(System.Net.HttpStatusCode.BadRequest);

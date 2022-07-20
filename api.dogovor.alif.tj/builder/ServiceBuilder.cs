@@ -20,7 +20,7 @@ namespace api.dogovor.alif.tj.builder
         {
             Services.AddDbContext<AppDbСontext>(x => x.UseSqlServer(connectionString, b => b.MigrationsAssembly("ConnectionProvider")).UseLazyLoadingProxies());
         }
-        public static void InjectedServices(this IServiceCollection Services)
+        public static void InjectedServices(this IServiceCollection Services, WebApplicationBuilder builder)
         {
             Services.AddScoped<IUserRepository, UserRepository>();
             Services.AddScoped<IUserService, UserService>();
@@ -31,7 +31,7 @@ namespace api.dogovor.alif.tj.builder
             Services.AddScoped<IArchiveRepository, ArchiveRepository>();
             Services.AddScoped<IArchiveService, ArchiveService>();
             Services.AddScoped<IMailService, MailService>();
-            Services.AddScoped<MailSettings>();
+            Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
         }
         public static void AddAuthentication(this IServiceCollection Services, WebApplicationBuilder builder)
         {

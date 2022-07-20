@@ -125,6 +125,21 @@ namespace Service.ContractServices
         {
             try
             {
+                DirectoryInfo di = new DirectoryInfo(path);
+                FileInfo[] files = di.GetFiles($"{dto.ContractName}.rtf")
+                                     .Where(p => p.Extension == ".rtf").ToArray();
+                foreach (FileInfo file in files)
+                    try
+                    {
+                        file.Attributes = FileAttributes.Normal;
+                        System.IO.File.Delete(file.FullName);
+                    }
+                    catch 
+                    {
+                        LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString());
+                        return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest };
+                    }
+
                 if (!System.IO.Directory.Exists(path))
                     System.IO.Directory.CreateDirectory(path);
 
@@ -140,27 +155,6 @@ namespace Service.ContractServices
 
                 System.IO.File.Move(fileName, Path.ChangeExtension(fileName, ".rtf"));
 
-                //fileName = fileName.Replace("txt", "rtf");
-                
-                //var convertApi = new ConvertApi("S1alNMap0GwMC3zi");
-                //var convert = await convertApi.ConvertAsync("rtf", $"{dto.Format}", new ConvertApiFileParam("File", fileName));
-                //await convert.SaveFilesAsync(path);
-                
-                
-                //DirectoryInfo di = new DirectoryInfo(path);
-                //FileInfo[] files = di.GetFiles("*.rtf")
-                //                     .Where(p => p.Extension == ".rtf").ToArray();
-                //foreach (FileInfo file in files)
-                //    try
-                //    {
-                //        file.Attributes = FileAttributes.Normal;
-                //        System.IO.File.Delete(file.FullName);
-                //    }
-                //    catch { }
-
-
-
-                //var Archive = _archive.ArchivePost();
                 return new Response { StatusCode = System.Net.HttpStatusCode.OK };
             }
             catch (Exception ex)

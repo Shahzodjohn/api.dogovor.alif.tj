@@ -18,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.DbConnection(connectionString);
-builder.Services.InjectedServices();
+builder.Services.InjectedServices(builder);
 builder.Services.AddAuthentication(builder);
 builder.Services.AddCors();
 var app = builder.Build();

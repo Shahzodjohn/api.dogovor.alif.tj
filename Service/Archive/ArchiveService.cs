@@ -33,14 +33,15 @@ namespace Service
                 DirectoryInfo di = new DirectoryInfo(path);
                 FileInfo[] files = di.GetFiles($"{dto.ContractName}.rtf")
                                      .Where(p => p.Extension == ".rtf").ToArray();
-
-                foreach (FileInfo file in files)
-                    try
-                    {
-                        file.Attributes = FileAttributes.Normal;
-                        System.IO.File.Delete(file.FullName);
-                    }
-                    catch { }
+                #region
+                //foreach (FileInfo file in files)
+                //    try
+                //    {
+                //        file.Attributes = FileAttributes.Normal;
+                //        System.IO.File.Delete(file.FullName);
+                //    }
+                //    catch { }
+                #endregion
 
                 ArchiveDTO archiveDTO = new ArchiveDTO()
                 {
