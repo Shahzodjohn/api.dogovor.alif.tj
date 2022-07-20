@@ -1,5 +1,6 @@
 ﻿using Entity.ContractChoice;
 using Entity.Entities;
+using Entity.Entities.Archivievum;
 using Entity.User;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -33,6 +34,7 @@ namespace ConnectionProvider.Context
         public DbSet<RendedServicesVariations> RendedServicesVariations { get; set; }
         public DbSet<AgreementEntity> AgreementEntities { get; set; }
         public DbSet<ActVariationsOfCompletion> ActVariationsOfCompletions { get; set; }
+        public DbSet<Archive> Archives { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -55,10 +57,6 @@ namespace ConnectionProvider.Context
             builder.Entity<RendedServicesVariations>().HasData(new RendedServicesVariations { Id = 1, RendedServiceName = "Головной - улица Багауддинова" },
                                                 new RendedServicesVariations { Id = 2, RendedServiceName = "Филиал в Душанбе - улица Ниёзи" },
                                                           new RendedServicesVariations { Id = 3, RendedServiceName = "Филиал в Худжанде - улицу не помню" });
-
-
-
-
         } 
     }
 }

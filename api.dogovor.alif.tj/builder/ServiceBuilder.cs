@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Repository;
+using Repository.ArchievumRepositories;
+using Repository.Email;
+using Service;
 using Service.ContractServices;
 using Service.IDropDownListService;
 using Service.UserService;
@@ -25,6 +28,10 @@ namespace api.dogovor.alif.tj.builder
             Services.AddScoped<ICategoryAndSubCategoryServices, CategoryAndSubCategoryServices>();
             Services.AddScoped<IDropDownLists, DropDownLists>();
             Services.AddScoped<IDropDowns, DropDowns>();
+            Services.AddScoped<IArchiveRepository, ArchiveRepository>();
+            Services.AddScoped<IArchiveService, ArchiveService>();
+            Services.AddScoped<IMailService, MailService>();
+            Services.AddScoped<MailSettings>();
         }
         public static void AddAuthentication(this IServiceCollection Services, WebApplicationBuilder builder)
         {

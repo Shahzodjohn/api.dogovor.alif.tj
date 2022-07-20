@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entity.TransferObjects
 {
-    public class TextDTO
+    public class ReturnFileDTO
     {
-        public string RTFtext { get; set; }
-        //public string Format { get; set; }
         public string ContractName { get; set; }
+        public string DocumentName { get; set; }
+        public string format { get; set; }
     }
 }

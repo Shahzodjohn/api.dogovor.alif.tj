@@ -1,10 +1,12 @@
 ﻿using api.dogovor.alif.tj.LogSettings;
 using ConvertApiDotNet;
 using Entity.ContractChoice;
+using Entity.Entities.Archivievum;
 using Entity.ReturnMessage;
 using Entity.TransferObjects;
 using Microsoft.AspNetCore.Http;
 using Repository;
+using Repository.ArchievumRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,7 @@ namespace Service.ContractServices
     public class CategoryAndSubCategoryServices : ICategoryAndSubCategoryServices
     {
         private readonly ICategoryAndSubCategoryRepository _subCategoryRepository;
+        private readonly IArchiveRepository _archive;
 
         public CategoryAndSubCategoryServices(ICategoryAndSubCategoryRepository subCategoryRepository)
         {
@@ -85,7 +88,7 @@ namespace Service.ContractServices
                 return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = ex.Message };
             }
             return new Response { StatusCode = System.Net.HttpStatusCode.OK };
-        }
+        }   
 
         public async Task<Response> GetSubCategory(int Id)
         {
@@ -137,27 +140,31 @@ namespace Service.ContractServices
 
                 System.IO.File.Move(fileName, Path.ChangeExtension(fileName, ".rtf"));
 
-                fileName = fileName.Replace("txt", "rtf");
+                //fileName = fileName.Replace("txt", "rtf");
                 
-                var convertApi = new ConvertApi("S1alNMap0GwMC3zi");
-                var convert = await convertApi.ConvertAsync("rtf", $"{dto.Format}", new ConvertApiFileParam("File", fileName));
-                await convert.SaveFilesAsync(path);
+                //var convertApi = new ConvertApi("S1alNMap0GwMC3zi");
+                //var convert = await convertApi.ConvertAsync("rtf", $"{dto.Format}", new ConvertApiFileParam("File", fileName));
+                //await convert.SaveFilesAsync(path);
                 
                 
-                DirectoryInfo di = new DirectoryInfo(path);
-                FileInfo[] files = di.GetFiles("*.rtf")
-                                     .Where(p => p.Extension == ".rtf").ToArray();
-                foreach (FileInfo file in files)
-                    try
-                    {
-                        file.Attributes = FileAttributes.Normal;
-                        System.IO.File.Delete(file.FullName);
-                    }
-                    catch { }
+                //DirectoryInfo di = new DirectoryInfo(path);
+                //FileInfo[] files = di.GetFiles("*.rtf")
+                //                     .Where(p => p.Extension == ".rtf").ToArray();
+                //foreach (FileInfo file in files)
+                //    try
+                //    {
+                //        file.Attributes = FileAttributes.Normal;
+                //        System.IO.File.Delete(file.FullName);
+                //    }
+                //    catch { }
+
+
+
+                //var Archive = _archive.ArchivePost();
                 return new Response { StatusCode = System.Net.HttpStatusCode.OK };
             }
             catch (Exception ex)
-            {
+            { 
                 return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = ex.Message };
             }
         }
