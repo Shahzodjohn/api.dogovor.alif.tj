@@ -23,31 +23,37 @@ namespace Repository.Email
             _settings = options.Value;
         }
 
-        public async Task<Response> SendEmailResetAsync(MailParameters dto)
+        public async Task<Response> SendEmailAsync(MailParameters dto)
         {
-            var convertApi = new ConvertApi("S1alNMap0GwMC3zi");
-            var convert = await convertApi.ConvertAsync("rtf", "pdf",
-                new ConvertApiFileParam("File", dto.FilePath));
-            var OutputPath = dto.FilePath.Replace(dto.FilePath.Split('/').ToList().LastOrDefault(), "").TrimEnd(new char[] { '/' });
-            await convert.SaveFilesAsync(OutputPath);
-            dto.FilePath = dto.FilePath.Replace("rtf", "pdf");
-
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_settings.Mail);
             email.To.Add(MailboxAddress.Parse(dto.toEmail));
             var builder = new BodyBuilder();
             
-            if (dto.FilePath != null)
+            if (dto.FilePath != "" && dto.FilePath != null)
             {
+                var convertApi = new ConvertApi("S1alNMap0GwMC3zi");
+                var convert = await convertApi.ConvertAsync("rtf", "pdf",
+                    new ConvertApiFileParam("File", dto.FilePath));
+                var OutputPath = dto.FilePath.Replace(dto.FilePath.Split('/').ToList().LastOrDefault(), "").TrimEnd(new char[] { '/' });
+                await convert.SaveFilesAsync(OutputPath);
+                dto.FilePath = dto.FilePath.Replace("rtf", "pdf");
                 var filePath = dto.FilePath.Split('/').ToArray().LastOrDefault();
                 if (dto.Subject == "")
                     email.Subject = filePath;
-                builder.Attachments.Add(dto.FilePath);
+                DirectoryInfo directory = new DirectoryInfo(OutputPath);
+                foreach (FileInfo file in directory.GetFiles(filePath))
+                {
+                    if (file.Exists)
+                    {
+                        builder.Attachments.Add(file.FullName);
+                    }
+                }
             }
             else
                 email.Subject = dto.Subject;
-            email.Body = builder.ToMessageBody();
             builder.HtmlBody = dto.htmlBody;
+            email.Body = builder.ToMessageBody();
             using (var smtp = new SmtpClient())
             {
                 smtp.Connect(_settings.Host, _settings.Port, SecureSocketOptions.StartTls);

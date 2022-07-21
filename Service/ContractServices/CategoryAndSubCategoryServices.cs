@@ -125,6 +125,9 @@ namespace Service.ContractServices
         {
             try
             {
+                if (!System.IO.Directory.Exists(path))  
+                    System.IO.Directory.CreateDirectory(path);
+
                 DirectoryInfo di = new DirectoryInfo(path);
                 FileInfo[] files = di.GetFiles($"{dto.ContractName}.rtf")
                                      .Where(p => p.Extension == ".rtf").ToArray();
@@ -140,9 +143,6 @@ namespace Service.ContractServices
                         return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest };
                     }
 
-                if (!System.IO.Directory.Exists(path))
-                    System.IO.Directory.CreateDirectory(path);
-
                 var fileName = Path.Combine(path, $"{dto.ContractName}.txt");
                 if (System.IO.File.Exists(fileName))
                     System.IO.File.Delete(fileName);
@@ -155,7 +155,7 @@ namespace Service.ContractServices
 
                 System.IO.File.Move(fileName, Path.ChangeExtension(fileName, ".rtf"));
 
-                return new Response { StatusCode = System.Net.HttpStatusCode.OK };
+                return new Response { StatusCode = System.Net.HttpStatusCode.OK, Message = fileName.Replace("txt","rtf") };
             }
             catch (Exception ex)
             { 

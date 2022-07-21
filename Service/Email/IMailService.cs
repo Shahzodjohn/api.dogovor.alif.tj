@@ -11,6 +11,6 @@ namespace Repository.Email
 {
     public interface IMailService
     {
-        public Task<Response> SendEmailResetAsync(MailParameters dto);
+        public Task<Response> SendEmailAsync(MailParameters dto);
     }
 }

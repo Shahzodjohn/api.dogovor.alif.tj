@@ -47,8 +47,8 @@ namespace api.dogovor.alif.tj.Controllers
         public async Task<IActionResult> SendFinalFileToEmail(MailParameters dto)
         {
             dto.Subject = dto.Subject;
-            var mail = await _mail.SendEmailResetAsync(dto);
-            return Ok();
+            var mail = await _mail.SendEmailAsync(dto);
+            return Ok(mail);
         }
     }   
 }
