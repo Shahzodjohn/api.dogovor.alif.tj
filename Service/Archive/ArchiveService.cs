@@ -26,22 +26,15 @@ namespace Service
             try
             {
                 var fileName = Path.Combine(path, dto.ContractName + ".rtf");
+                
                 var convertApi = new ConvertApi("S1alNMap0GwMC3zi");
                 var convert = await convertApi.ConvertAsync("rtf", $"{dto.format}", new ConvertApiFileParam("File", fileName));
                 await convert.SaveFilesAsync(path);
                 fileName = fileName.Replace("rtf", dto.format);
+                
                 DirectoryInfo di = new DirectoryInfo(path);
                 FileInfo[] files = di.GetFiles($"{dto.ContractName}.rtf")
                                      .Where(p => p.Extension == ".rtf").ToArray();
-                #region
-                //foreach (FileInfo file in files)
-                //    try
-                //    {
-                //        file.Attributes = FileAttributes.Normal;
-                //        System.IO.File.Delete(file.FullName);
-                //    }
-                //    catch { }
-                #endregion
 
                 ArchiveDTO archiveDTO = new ArchiveDTO()
                 {
@@ -51,7 +44,7 @@ namespace Service
                     DocumentType = dto.DocumentName,
                     FilePath = fileName,
                 };
-                var Archive = await _archive.ArchivePost(archiveDTO);
+                await _archive.ArchivePost(archiveDTO);
                 LogProvider.GetInstance().Info( new Response { StatusCode = System.Net.HttpStatusCode.OK }.ToString(), "Successfull process!");
                 return fileName.Replace("rtf", dto.format);
             }

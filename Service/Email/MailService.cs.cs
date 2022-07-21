@@ -35,6 +35,7 @@ namespace Repository.Email
                 var convertApi = new ConvertApi("S1alNMap0GwMC3zi");
                 var convert = await convertApi.ConvertAsync("rtf", "pdf",
                     new ConvertApiFileParam("File", dto.FilePath));
+                
                 var OutputPath = dto.FilePath.Replace(dto.FilePath.Split('/').ToList().LastOrDefault(), "").TrimEnd(new char[] { '/' });
                 await convert.SaveFilesAsync(OutputPath);
                 dto.FilePath = dto.FilePath.Replace("rtf", "pdf");
@@ -62,30 +63,6 @@ namespace Repository.Email
                 smtp.Disconnect(true);
             }
             return new Response { StatusCode = System.Net.HttpStatusCode.OK };
-
-            //email.Subject = "Восстановление пароля";
-            //string bodyContent =  @"<!DOCTYPE html>
-            //                            <html>
-            //                            <head>
-            //                            <style>
-            //                                p {
-            //                                    font-size: 20px;
-            //                                    margin-left : 30px;
-            //                                }
-            //                                a {
-            //                                    font-weight : bold;
-            //                                }
-            //                            </style>
-            //                            </head>
-            //                            <body>
-            //                            <p> Alif Bank </p>";
-            //bodyContent += $"<p> <a> E-mail адрес: </a>  {model.clientname} </p> ";
-            //bodyContent += $" <p> <a> Пароль:  </a> {model.phone}  </p> ";
-
-
-            //bodyContent += $" <p> <a> Email:  </a> {model.email}</p> ";
-            //bodyContent += $" <div> <p> <a> Wiadomość: </a> {model.message} </p> </div> </body> </html>";
-
         }
     }
 }

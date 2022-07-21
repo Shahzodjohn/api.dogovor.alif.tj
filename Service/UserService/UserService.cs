@@ -53,7 +53,7 @@ namespace Service.UserService
     <tbody>
       <tr>
         <td style='text-align: center; padding: 30px 0; font-size: 2.5rem;'>
-          <span style='color: #39B980; font-weight: 700;'>Alif</span> Dogovor
+          <span style='color: #39B980; font-weight: 700;'>Alif Dogovor</span>
         </td>
       </tr>
       <tr>

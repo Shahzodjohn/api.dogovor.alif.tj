@@ -25,11 +25,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetAgent();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
             return lst;
         }
@@ -40,11 +40,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetAgreementConcluder();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
             return lst;
         }
@@ -55,11 +55,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetCitizenship();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
             return lst;
         }
@@ -70,11 +70,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetCityList();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
             return lst;
         }
@@ -85,11 +85,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetPassportType();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
             return lst;
         }
@@ -100,11 +100,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetPartialPaymentOrder();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
             return lst;
         }
@@ -115,11 +115,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetPaymentOrder();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
             return lst;
         }
@@ -130,11 +130,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetRendedServicesVariations();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
             return lst;
         }
@@ -145,11 +145,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetService();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
             return lst;
         }
@@ -160,11 +160,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetStructuralSubdivision();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.OK.ToString(), ex.Message.ToString());
             }
             return lst;
         }
@@ -175,11 +175,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetTrustieFoundation();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
             return lst;
         }
@@ -190,11 +190,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetActVariationsOfCompletions();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
             return lst;
         }
@@ -205,11 +205,11 @@ namespace Service.IDropDownListService
             try
             {
                 lst = await _list.GetAgreementEntities();
-                LogProvider.GetInstance().Info("200", "Got the list of Agents");
+                LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
-                LogProvider.GetInstance().Error("400", ex.Message.ToString());
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
             return lst;
         }

@@ -12,12 +12,10 @@ namespace api.dogovor.alif.tj.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly AppDbСontext _context;
 
-        public UsersController(IUserService userService, AppDbСontext context)
+        public UsersController(IUserService userService)
         {
             _userService = userService;
-            _context = context;
         }
 
         [HttpPost("Register")]
