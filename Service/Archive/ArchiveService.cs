@@ -53,7 +53,6 @@ namespace Service
                 LogProvider.GetInstance().Error(new Response { StatusCode = System.Net.HttpStatusCode.BadRequest }.ToString(), ex.Message.ToString());
                 return null;
             }
-            
         }   
     }
 }

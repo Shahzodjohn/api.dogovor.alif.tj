@@ -7,13 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -74,6 +71,69 @@ namespace Repository
         {
             var user = await _сontext.Roles.FirstOrDefaultAsync(x => x.Id== Id);
             return user;
+        }
+
+        public async Task<UserCode> GetUserCodeCompared(string email)
+        {
+            var findUser = await GetUserbyEmail(email);
+            if (findUser == null)
+            return null;
+            var UserCode = (from r in _сontext.UserCodes
+                            join u in _сontext.Users on r.UserId equals u.Id
+                            where r.UserId == findUser.Id
+                            select r).FirstOrDefault();
+            return UserCode;
+        }
+        public async Task<UserCode> InsertUserCode(string randomNumber, int UserId, DateTime date)
+        {
+            try
+            {
+                var dataInsert = new UserCode
+                {
+                    RandomNumber = randomNumber.ToString(),
+                    UserId = UserId,
+                    ValidDate = date
+                };
+                await _сontext.UserCodes.AddAsync(dataInsert);
+                await _сontext.SaveChangesAsync();
+                return dataInsert;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task UpdateCode(UserCode userCode, int NewCode)
+        {
+            userCode.RandomNumber = NewCode.ToString();
+            await _сontext.SaveChangesAsync();
+        }
+        public string GetUserByEmailAndCode(RandomNumberDTO dto)
+        {
+            var UserEmail = (from r in  _сontext.UserCodes
+                             join u in _сontext.Users on r.UserId equals u.Id
+                             where u.EmailAddress.ToLower() == dto.Email.ToLower() && r.RandomNumber == dto.RandomNumber
+                             select new { u.EmailAddress, r.RandomNumber }).FirstOrDefault();
+            if (UserEmail == null)
+                return null;
+            return UserEmail.ToString();
+        }
+
+        public async Task<Response> UpdateUsersPassword(NewPasswordDTO dto)
+        {
+            var user = await GetUserbyEmail(dto.Email);
+            try
+            {
+                if (user == null)
+                    return new Response { StatusCode = System.Net.HttpStatusCode.NotFound };
+                user.Password = BCrypt.Net.BCrypt.HashPassword(dto.NewPassword);
+                await _сontext.SaveChangesAsync();
+                return new Response { StatusCode = System.Net.HttpStatusCode.OK };
+            }
+            catch (Exception ex)
+            {
+                return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = ex.Message };
+            }
         }
     }
 }

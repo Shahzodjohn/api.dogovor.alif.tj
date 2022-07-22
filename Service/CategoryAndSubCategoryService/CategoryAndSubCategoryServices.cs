@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 
 namespace Service.ContractServices
 {
-    //LogProvider.GetInstance().Warning("400", "User not found!");
     public class CategoryAndSubCategoryServices : ICategoryAndSubCategoryServices
     {
         private readonly ICategoryAndSubCategoryRepository _subCategoryRepository;
@@ -42,8 +41,10 @@ namespace Service.ContractServices
 
         public async Task<Response> CreateSubCategory(SubCategoryDTO dto, string path)
         {
+            Mutex mutex = new Mutex();
             try
             {
+                mutex.WaitOne();
                 string filePath = Path.Combine(path, dto.form.FileName);
                 if (!System.IO.Directory.Exists(path))
                     System.IO.Directory.CreateDirectory(path);
@@ -88,6 +89,10 @@ namespace Service.ContractServices
                 LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
                 return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = ex.Message };
             }
+            finally
+            {
+                mutex.ReleaseMutex();
+            }
             return new Response { StatusCode = System.Net.HttpStatusCode.OK };
         }   
 
@@ -115,7 +120,7 @@ namespace Service.ContractServices
             var fileString = await _subCategoryRepository.GetSubCategoryFile(Id);
             if(fileString == null)
             {
-                LogProvider.GetInstance().Error("400", "File not found!");
+                LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), "File not found!");
                 return new Response { StatusCode = System.Net.HttpStatusCode.NotFound, Message = "Sub Category not found! Is it hidin' Somewhere?" };
             }
             LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Successfull process!");
@@ -124,8 +129,10 @@ namespace Service.ContractServices
 
         public async Task<Response> ReceiveFinalText(TextDTO dto, string path)
         {
+            Mutex mutex = new Mutex();
             try
             {
+                mutex.WaitOne();
                 if (!System.IO.Directory.Exists(path))  
                     System.IO.Directory.CreateDirectory(path);
 
@@ -162,6 +169,10 @@ namespace Service.ContractServices
             {
                 LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString());
                 return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = ex.Message };
+            }
+            finally
+            {
+                mutex.ReleaseMutex();
             }
         }
     }

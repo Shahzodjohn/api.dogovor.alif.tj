@@ -10,6 +10,8 @@ namespace Service.UserService
         public Task<Response> RegisterUser(RegisterDTO dto);
         public Task<Response> Login(AuthorizationDTO dto);
         public Task<User> UsersInformation(ClaimsIdentity claim);
-        //public Task<Response> ResetPassword();
+        public Task<Response> SendEmailCode(string Email);
+        public Response VerifyUser(RandomNumberDTO dto);
+        public Task<Response> UpdateUserPassword(NewPasswordDTO dto);
     }
 }

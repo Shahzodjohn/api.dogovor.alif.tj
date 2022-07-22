@@ -64,7 +64,5 @@ namespace api.dogovor.alif.tj.Controllers
                 return Ok(response);
             return BadRequest(response);
         }
-        
-
     }
 }

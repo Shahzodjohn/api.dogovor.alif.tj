@@ -35,6 +35,7 @@ namespace ConnectionProvider.Context
         public DbSet<AgreementEntity> AgreementEntities { get; set; }
         public DbSet<ActVariationsOfCompletion> ActVariationsOfCompletions { get; set; }
         public DbSet<Archive> Archives { get; set; }
+        public DbSet<UserCode> UserCodes { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
