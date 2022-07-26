@@ -18,6 +18,9 @@ namespace api.dogovor.alif.tj.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// Registers User
+        /// </summary>
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterDTO dto)
         {
@@ -26,6 +29,7 @@ namespace api.dogovor.alif.tj.Controllers
             var returnMessage = await _userService.RegisterUser(dto);
             return returnMessage.StatusCode == System.Net.HttpStatusCode.BadRequest ? BadRequest(returnMessage) : Ok(returnMessage);
         }
+
         [HttpPost("Login")]
         public async Task<IActionResult> Login(AuthorizationDTO dto)
         {
@@ -34,6 +38,7 @@ namespace api.dogovor.alif.tj.Controllers
             var returnMessage = await _userService.Login(dto);
             return returnMessage.StatusCode == System.Net.HttpStatusCode.BadRequest ? BadRequest(returnMessage) : Ok(returnMessage);
         }
+
         [HttpGet("CurrentUser")]
         [Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> CurrentUser()
@@ -43,11 +48,13 @@ namespace api.dogovor.alif.tj.Controllers
             var userInfo = await _userService.UsersInformation(claim);
             return Ok(userInfo);
         }
+
         [HttpPost("SendEmailMessage")]
         public async Task<IActionResult> SendEmailMessage(string Email)
         {
             return Ok(await _userService.SendEmailCode(Email));
         }
+
         [HttpPost("VarifyUser")]
         public ActionResult VerifyUser(RandomNumberDTO randpmNumberdto)
         {
