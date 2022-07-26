@@ -1,10 +1,10 @@
-﻿using Entity.TransferObjects;
+﻿using Domain.TransferObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.UserService;
 using System.Security.Claims;
 using ConnectionProvider.Context;
-using Entity.ReturnMessage;
+using Domain.ReturnMessage;
 
 namespace api.dogovor.alif.tj.Controllers
 {
@@ -36,9 +36,7 @@ namespace api.dogovor.alif.tj.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
             var returnMessage = await _userService.Login(dto);
-            if (returnMessage.Status == "400")
-                return BadRequest(returnMessage);
-            return Ok("Json web token = " + returnMessage.Message);
+            return returnMessage.StatusCode == System.Net.HttpStatusCode.BadRequest ? BadRequest(returnMessage) : Ok(returnMessage);
         }
         [HttpGet("CurrentUser")]
         [Authorize(AuthenticationSchemes = "Bearer")]
@@ -55,9 +53,10 @@ namespace api.dogovor.alif.tj.Controllers
             return Ok(await _userService.SendEmailCode(Email));
         }
         [HttpPost("VarifyUser")]
-        public ActionResult VerifyUser(RandomNumberDTO dto)
+        public ActionResult VerifyUser(RandomNumberDTO randpmNumberdto)
         {
-            var UserEmail = _userService.VerifyUser(dto);
+            var UserEmail = _userService.VerifyUser(randpmNumberdto);
+
             if (UserEmail.StatusCode == System.Net.HttpStatusCode.NotFound) { return BadRequest(UserEmail); };
             return Ok(new Response { StatusCode = System.Net.HttpStatusCode.OK, Message = "Verification success!" });
         }
@@ -65,9 +64,7 @@ namespace api.dogovor.alif.tj.Controllers
         public async Task<ActionResult> ResetPassword(NewPasswordDTO dto)
         {
             var reset = await _userService.UpdateUserPassword(dto);
-            if (reset == null)
-                return BadRequest(new Response { Status = "Error", Message = "Password was not updated!" });
-            return Ok(new Response { Status = "Success!", Message = "The Password is updated successfully" });
+            return reset == null ? BadRequest(reset) : Ok(reset);
         }
 
     }

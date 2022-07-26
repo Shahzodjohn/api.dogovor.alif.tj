@@ -1,18 +1,9 @@
 ﻿using api.dogovor.alif.tj.LogSettings;
 using ConvertApiDotNet;
-using Entity.ContractChoice;
-using Entity.Entities.Archivievum;
-using Entity.ReturnMessage;
-using Entity.TransferObjects;
-using Microsoft.AspNetCore.Http;
+using Domain.ContractChoice;
+using Domain.ReturnMessage;
+using Domain.TransferObjects;
 using Repository;
-using Repository.ArchievumRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Service.ContractServices
 {
     public class CategoryAndSubCategoryServices : ICategoryAndSubCategoryServices
@@ -65,13 +56,9 @@ namespace Service.ContractServices
                     System.IO.File.Delete(textFile);
 
                 var finaltext = System.IO.File.ReadAllText(textFile);
-                var subCategory = new SubCategory
-                {
-                    SubCategoryName = dto.SubCategoryName,
-                    SampleInstance = finaltext,
-                    CategoryId = dto.CategoryId
-                };
-                await _subCategoryRepository.CreateSubCategory(subCategory);
+                await _subCategoryRepository.CreateSubCategory(new SubCategory 
+                                                      {  SubCategoryName = dto.SubCategoryName, SampleInstance = finaltext, CategoryId = dto.CategoryId});
+
                 System.IO.DirectoryInfo directory = new DirectoryInfo(path);
 
                 foreach (FileInfo file in directory.GetFiles())

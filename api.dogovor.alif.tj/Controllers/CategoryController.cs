@@ -1,10 +1,5 @@
-﻿using ConnectionProvider.Context;
-using ConvertApiDotNet;
-using Entity.ContractChoice;
-using Entity.TransferObjects;
-using Microsoft.AspNetCore.Http;
+﻿using Domain.TransferObjects;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Service.ContractServices;
 
 namespace api.dogovor.alif.tj.Controllers
@@ -39,9 +34,9 @@ namespace api.dogovor.alif.tj.Controllers
         }
 
         [HttpPost("CreateCategory")]
-        public async Task<IActionResult> CreateCategory(CategoryDTO dTO)
+        public async Task<IActionResult> CreateCategory(CategoryDTO categoryDto)
         {
-            var category = await _categoryAndSubCategoryServices.CreateCategory(dTO);
+            var category = await _categoryAndSubCategoryServices.CreateCategory(categoryDto);
             if (category.StatusCode != System.Net.HttpStatusCode.OK)
                 return BadRequest(category);
             return Ok(category.StatusCode);
@@ -50,19 +45,15 @@ namespace api.dogovor.alif.tj.Controllers
         public async Task<IActionResult> GetFile(int SubCategoryId)
         {
             var subCategoryFile = await _categoryAndSubCategoryServices.GetSubCategoryFile(SubCategoryId);
-            if (subCategoryFile.StatusCode != System.Net.HttpStatusCode.OK)
-                return NotFound();
-            return Ok(subCategoryFile.Message);
+            return subCategoryFile.StatusCode != System.Net.HttpStatusCode.OK ? NotFound(subCategoryFile) : Ok(subCategoryFile);
         }
         
         [HttpPost("ReceiveFinalText")]
-        public async Task<IActionResult> ReceiveFinalText([FromForm] TextDTO dto)
+        public async Task<IActionResult> ReceiveFinalText([FromForm] TextDTO textDto)
         {
             var path = (Path.Combine(_webHostEnvironment.WebRootPath, $"{ DateTime.Today.ToString("D") }"));
-            var response = await _categoryAndSubCategoryServices.ReceiveFinalText(dto, path);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                return Ok(response);
-            return BadRequest(response);
+            var response = await _categoryAndSubCategoryServices.ReceiveFinalText(textDto, path);
+            return response.StatusCode == System.Net.HttpStatusCode.OK ? Ok(response) : BadRequest(response);
         }
     }
 }

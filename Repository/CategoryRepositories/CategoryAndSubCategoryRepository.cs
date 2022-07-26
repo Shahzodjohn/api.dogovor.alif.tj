@@ -1,6 +1,6 @@
 ﻿using ConnectionProvider.Context;
-using Entity.ContractChoice;
-using Entity.TransferObjects;
+using Domain.ContractChoice;
+using Domain.TransferObjects;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

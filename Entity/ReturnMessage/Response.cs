@@ -1,6 +1,4 @@
-﻿
-
-namespace Entity.ReturnMessage
+﻿namespace Domain.ReturnMessage
 {
     public class Response : HttpResponseMessage
     {

@@ -1,5 +1,5 @@
-﻿using Entity.ReturnMessage;
-using Entity.TransferObjects;
+﻿using Domain.ReturnMessage;
+using Domain.TransferObjects;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

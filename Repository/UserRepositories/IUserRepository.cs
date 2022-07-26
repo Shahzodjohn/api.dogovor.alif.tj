@@ -1,7 +1,7 @@
-﻿using Entity;
-using Entity.ReturnMessage;
-using Entity.TransferObjects;
-using Entity.User;
+﻿using Domain;
+using Domain.ReturnMessage;
+using Domain.TransferObjects;
+using Domain.User;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Security.Claims;
 

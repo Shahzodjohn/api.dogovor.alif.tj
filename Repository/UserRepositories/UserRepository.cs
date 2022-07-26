@@ -1,8 +1,8 @@
 ﻿using ConnectionProvider.Context;
-using Entity;
-using Entity.ReturnMessage;
-using Entity.TransferObjects;
-using Entity.User;
+using Domain;
+using Domain.ReturnMessage;
+using Domain.TransferObjects;
+using Domain.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;

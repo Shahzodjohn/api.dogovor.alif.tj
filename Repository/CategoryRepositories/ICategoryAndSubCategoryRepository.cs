@@ -1,5 +1,5 @@
-﻿using Entity.ContractChoice;
-using Entity.TransferObjects;
+﻿using Domain.ContractChoice;
+using Domain.TransferObjects;
 using Microsoft.AspNetCore.Http;
 
 namespace Repository

@@ -1,13 +1,8 @@
-﻿using Entity.ContractChoice;
-using Entity.Entities;
-using Entity.Entities.Archivievum;
-using Entity.User;
+﻿using Domain.ContractChoice;
+using Domain.Entities;
+using Domain.Entities.Archivievum;
+using Domain.User;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConnectionProvider.Context
 {

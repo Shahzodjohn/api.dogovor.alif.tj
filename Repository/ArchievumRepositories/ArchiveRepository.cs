@@ -1,6 +1,6 @@
 ﻿using ConnectionProvider.Context;
-using Entity.Entities.Archivievum;
-using Entity.TransferObjects;
+using Domain.Entities.Archivievum;
+using Domain.TransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

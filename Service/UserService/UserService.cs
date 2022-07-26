@@ -1,6 +1,6 @@
 ﻿using api.dogovor.alif.tj.LogSettings;
-using Entity.ReturnMessage;
-using Entity.TransferObjects;
+using Domain.ReturnMessage;
+using Domain.TransferObjects;
 using Repository;
 using Repository.Email;
 using System.Security.Claims;
@@ -130,12 +130,12 @@ namespace Service.UserService
             }
         }
 
-        public async Task<Entity.User.User> UsersInformation(ClaimsIdentity claim)
+        public async Task<Domain.User.User> UsersInformation(ClaimsIdentity claim)
         {
             var user = await _uRepository.GetUserbyEmail(claim.Name);
             var role = await _uRepository.GetUserRole(user.RoleId);
 
-            var userInfo = new Entity.User.User
+            var userInfo = new Domain.User.User
             {
                 Id = user.Id,
                 FirstName = user.FirstName,

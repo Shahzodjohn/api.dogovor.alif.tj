@@ -1,12 +1,8 @@
 ﻿using api.dogovor.alif.tj.LogSettings;
-using Entity.Entities;
+using Domain.Entities;
 using IDropDownListService;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Service.IDropDownListService
 {

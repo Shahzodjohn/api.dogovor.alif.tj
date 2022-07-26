@@ -1,6 +1,6 @@
-﻿using Entity.ContractChoice;
-using Entity.ReturnMessage;
-using Entity.TransferObjects;
+﻿using Domain.ContractChoice;
+using Domain.ReturnMessage;
+using Domain.TransferObjects;
 using Microsoft.AspNetCore.Http;
 
 namespace Service.ContractServices

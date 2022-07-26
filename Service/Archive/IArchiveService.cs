@@ -1,5 +1,5 @@
-﻿using Entity.TransferObjects;
-using Entity.User;
+﻿using Domain.TransferObjects;
+using Domain.User;
 
 namespace Service
 {

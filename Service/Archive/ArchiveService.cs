@@ -1,14 +1,9 @@
 ﻿using api.dogovor.alif.tj.LogSettings;
 using ConvertApiDotNet;
-using Entity.ReturnMessage;
-using Entity.TransferObjects;
-using Entity.User;
+using Domain.ReturnMessage;
+using Domain.TransferObjects;
+using Domain.User;
 using Repository.ArchievumRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service
 {
@@ -21,32 +16,27 @@ namespace Service
             _archive = archive;
         }
 
-        public async Task<string> ReturnFile(ReturnFileDTO dto, string path, User user)
+        public async Task<string> ReturnFile(ReturnFileDTO fileDto, string path, User user)
         {
             try
             {
-                var fileName = Path.Combine(path, dto.ContractName + ".rtf");
+                var fileName = Path.Combine(path, fileDto.ContractName + ".rtf");
                 
                 var convertApi = new ConvertApi("S1alNMap0GwMC3zi");
-                var convert = await convertApi.ConvertAsync("rtf", $"{dto.format}", new ConvertApiFileParam("File", fileName));
+                var convert = await convertApi.ConvertAsync("rtf", $"{fileDto.format}", new ConvertApiFileParam("File", fileName));
                 await convert.SaveFilesAsync(path);
-                fileName = fileName.Replace("rtf", dto.format);
+                fileName = fileName.Replace("rtf", fileDto.format);
                 
                 DirectoryInfo di = new DirectoryInfo(path);
-                FileInfo[] files = di.GetFiles($"{dto.ContractName}.rtf")
+                FileInfo[] files = di.GetFiles($"{fileDto.ContractName}.rtf")
                                      .Where(p => p.Extension == ".rtf").ToArray();
 
-                ArchiveDTO archiveDTO = new ArchiveDTO()
-                {
-                    ContractName = dto.ContractName,
-                    ExecutorsEmail = user.EmailAddress,
-                    ExecutorsFullName = user.FirstName + " " + user.LastName,
-                    DocumentType = dto.DocumentName,
-                    FilePath = fileName,
-                };
-                await _archive.ArchivePost(archiveDTO);
+                await _archive.ArchivePost(new ArchiveDTO { ContractName = fileDto.ContractName, ExecutorsEmail = user.EmailAddress, 
+                                                            ExecutorsFullName = user.FirstName + " " + user.LastName,
+                                                            DocumentType = fileDto.DocumentName, FilePath = fileName });
+
                 LogProvider.GetInstance().Info( new Response { StatusCode = System.Net.HttpStatusCode.OK }.ToString(), "Successfull process!");
-                return fileName.Replace("rtf", dto.format);
+                return fileName.Replace("rtf", fileDto.format);
             }
             catch (Exception ex)
             {

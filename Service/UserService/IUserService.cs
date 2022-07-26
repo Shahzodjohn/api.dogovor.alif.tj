@@ -1,6 +1,6 @@
-﻿using Entity.ReturnMessage;
-using Entity.TransferObjects;
-using Entity.User;
+﻿using Domain.ReturnMessage;
+using Domain.TransferObjects;
+using Domain.User;
 using System.Security.Claims;
 
 namespace Service.UserService
