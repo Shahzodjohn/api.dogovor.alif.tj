@@ -19,7 +19,9 @@ namespace api.dogovor.alif.tj.Controllers
         {
             return Ok(await _list.GetAgent());
         }
-
+        /// <summary>
+        /// Договор заключает
+        /// </summary>
         [HttpGet("AgreementConcluderList")]
         public async Task<IActionResult> GetAgreementConcluderList()
         {
@@ -66,11 +68,13 @@ namespace api.dogovor.alif.tj.Controllers
             return Ok(await _list.GetPaymentOrder());
         }
 
-        [HttpGet("RendedServicesVariationsList")]
-        public async Task<IActionResult> GetRendedServicesVariationsList()
-        {
-            return Ok(await _list.GetRendedServicesVariations());
-        }
+        //[HttpGet("RendedServicesVariationsList")]
+        //public async Task<IActionResult> GetRendedServicesVariationsList()
+        //{
+        //    return Ok(await _list.GetRendedServicesVariations());
+        //}
+
+
         /// <summary>
         /// Укажите услуги
         /// </summary>
@@ -88,25 +92,23 @@ namespace api.dogovor.alif.tj.Controllers
             return Ok(await _list.GetStructuralSubdivision());
         }
 
-        [HttpGet("TrustieFoundationList")]
-        public async Task<IActionResult> GetTrustieFoundationList()
-        {
-            return Ok(await _list.GetTrustieFoundation());
-        }
+        //[HttpGet("GetAgreementConcluder")]
+        //public async Task<IActionResult> GetAgreementConcluder()
+        //{
+        //    return Ok(await _list.GetAgreementConcluder());
+        //}
 
-        [HttpGet("ActVariationsOfCompletionsList")]
-        public async Task<IActionResult> GetActVariationsofCompletionsList()
-        {
-            return Ok(await _list.GetActVariationsOfCompletions());
-        }
-        /// <summary>
-        /// Договор заключает
-        /// </summary>
-        [HttpGet("AgreementEntitiesList")]
-        public async Task<IActionResult> GetAgreementEntitiesList()
-        {
-            return Ok(await _list.GetAgreementEntities());
-        }
+ 
+
+
+        ///// <summary>
+        ///// Договор заключает
+        ///// </summary>
+        //[HttpGet("AgreementEntitiesList")]
+        //public async Task<IActionResult> GetAgreementEntitiesList()
+        //{
+        //    return Ok(await _list.GetAgreementEntities());
+        //}
 
     }
 }
