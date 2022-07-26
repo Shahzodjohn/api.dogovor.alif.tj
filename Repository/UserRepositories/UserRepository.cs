@@ -1,4 +1,5 @@
-﻿using ConnectionProvider.Context;
+﻿using AutoMapper;
+using ConnectionProvider.Context;
 using Domain.ReturnMessage;
 using Domain.TransferObjects;
 using Domain.User;
@@ -23,12 +24,12 @@ namespace Repository
             _configuration = configuration;
         }
         public async Task<EntityEntry<User>> InsertUser(RegisterDTO dto)
-        {
+        { 
+
             var register = await _сontext.Users.AddAsync(new User
             {
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
-                PhoneNumber = dto.PhoneNumber,
                 EmailAddress = dto.EmailAddress.ToUpper(),
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
                 RoleId = 1,//Id = 1(User)
@@ -74,13 +75,7 @@ namespace Repository
         public async Task<UserCode> GetUserCodeCompared(string email)
         {
             var findUser = await GetUserbyEmail(email);
-            if (findUser == null)
-            return null;
-            var UserCode = (from r in _сontext.UserCodes
-                            join u in _сontext.Users on r.UserId equals u.Id
-                            where r.UserId == findUser.Id
-                            select r).FirstOrDefault();
-            return UserCode;
+            return findUser == null ? null : await _сontext.UserCodes.FirstOrDefaultAsync(x => x.UserId == findUser.Id);
         }
         public async Task<UserCode> InsertUserCode(string randomNumber, int UserId, DateTime date)
         {
@@ -106,15 +101,11 @@ namespace Repository
             userCode.RandomNumber = NewCode.ToString();
             await _сontext.SaveChangesAsync();
         }
-        public string GetUserByEmailAndCode(RandomNumberDTO dto)
+        public async Task<Response> GetUserByEmailAndCode(RandomNumberDTO dto)
         {
-            var UserEmail = (from r in  _сontext.UserCodes
-                             join u in _сontext.Users on r.UserId equals u.Id
-                             where u.EmailAddress.ToLower() == dto.Email.ToLower() && r.RandomNumber == dto.RandomNumber
-                             select new { u.EmailAddress, r.RandomNumber }).FirstOrDefault();
-            if (UserEmail == null)
-                return null;
-            return UserEmail.ToString();
+            var userEmail = await _сontext.UserCodes.FirstOrDefaultAsync(x => x.User.EmailAddress == dto.Email && x.User.Id == x.UserId);
+            return userEmail == null ? null : 
+                        new Response { StatusCode = System.Net.HttpStatusCode.OK, Message = String.Concat(userEmail.User.EmailAddress," ", userEmail.RandomNumber) };
         }
 
         public async Task<Response> UpdateUsersPassword(NewPasswordDTO dto)

@@ -28,8 +28,8 @@ namespace Service
                 fileName = fileName.Replace("rtf", fileDto.format);
                 
                 var directoryInfo = new DirectoryInfo(path);
-                FileInfo[] files = directoryInfo.GetFiles($"{fileDto.ContractName}.rtf")
-                                     .Where(p => p.Extension == ".rtf").ToArray();
+                //FileInfo[] files = directoryInfo.GetFiles($"{fileDto.ContractName}.rtf")
+                //                     .Where(p => p.Extension == ".rtf").ToArray();
 
                 await _archive.ArchivePost(new ArchiveDTO { ContractName = fileDto.ContractName, ExecutorsEmail = user.EmailAddress, 
                                                             ExecutorsFullName = String.Concat(user.FirstName," ",user.LastName),

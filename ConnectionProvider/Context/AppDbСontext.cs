@@ -37,22 +37,37 @@ namespace ConnectionProvider.Context
             builder.Entity<Role>().HasData(new Role { Id = 1, RoleName = "User"},
                                            new Role { Id = 2, RoleName = "Editor"},
                                            new Role { Id = 3, RoleName = "Admin"});
+            
             builder.Entity<City>().HasData(new City { Id = 1, CityName = "г. Душанбе" }); 
+           
             builder.Entity<StructuralSubdivision>().HasData(new StructuralSubdivision { Id = 1, SubdivisionName = "Филиали Ҷамъияти саҳомии кушодаи..." });  
+            
             builder.Entity<Citizenship>().HasData(new Citizenship { Id = 1, CitizenshipName = "Шахрванди Чумхурии Точикистон" });  
-            builder.Entity<TrustieFoundation>().HasData(new TrustieFoundation { Id = 1, FoundationName = "Доверенность" }, new TrustieFoundation { Id = 2, FoundationName = "Устав"}); 
+            
+            builder.Entity<TrustieFoundation>().HasData(new TrustieFoundation { Id = 1, FoundationName = "Доверенность" }, 
+                                                        new TrustieFoundation { Id = 2, FoundationName = "Устав"}); 
+            
             builder.Entity<PassportType>().HasData(new PassportType { Id = 1, PassportTypeName = "Шиноснома" }); 
-            builder.Entity<AgreementConcluder>().HasData(new AgreementConcluder { Id = 1, ConcluderName = "Договор заключает головной офис" }, new AgreementConcluder { Id = 2, ConcluderName = "Договор заключает филиал Банка в г. Душанбе" }, new AgreementConcluder { Id = 3, ConcluderName = "Договор заключает филиал Банка в г. Худжанде" });
-            //builder.Entity<PassportType>().HasData(new PassportType { Id = 1, PassportTypeName = "Шиноснома" });
-            builder.Entity<AgreementEntity>().HasData(new AgreementEntity { Id = 1, EntityName = "Юридическое лицо" }, new AgreementEntity { Id = 2, EntityName = "Индивидуальный предприниматель" }, new AgreementEntity { Id = 3, EntityName = "Физическое лицо" });
-            builder.Entity<Services>().HasData(new Services { Id = 1, ServiceName = "Услуга указывается в самом договоре" }, new Services {  Id = 2, ServiceName = "Услуга указывается в приложении к Договору" });
-            builder.Entity<Agent>().HasData(new Agent { Id = 1, AgentLocation = "Aгент находится в Душанбе " }, new Agent { Id = 2, AgentLocation = "Агент находится в Худжанде" });
+            
+            builder.Entity<AgreementConcluder>().HasData(new AgreementConcluder { Id = 1, ConcluderName = "Договор заключает головной офис" }, 
+                                                         new AgreementConcluder { Id = 2, ConcluderName = "Договор заключает филиал Банка в г. Душанбе" }, 
+                                                         new AgreementConcluder { Id = 3, ConcluderName = "Договор заключает филиал Банка в г. Худжанде" });
+            builder.Entity<AgreementEntity>().HasData(new AgreementEntity { Id = 1, EntityName = "Юридическое лицо" }, 
+                                                      new AgreementEntity { Id = 2, EntityName = "Индивидуальный предприниматель" }, 
+                                                      new AgreementEntity { Id = 3, EntityName = "Физическое лицо" });
+            builder.Entity<Services>().HasData(new Services { Id = 1, ServiceName = "Услуга указывается в самом договоре" }, 
+                                               new Services {  Id = 2, ServiceName = "Услуга указывается в приложении к Договору" });
+            
+            builder.Entity<Agent>().HasData(new Agent { Id = 1, AgentLocation = "Aгент находится в Душанбе " }, 
+                                            new Agent { Id = 2, AgentLocation = "Агент находится в Худжанде" });
+            
             builder.Entity<ActVariationsOfCompletion>().HasData(new ActVariationsOfCompletion { Id = 1, Variation = "Качество оказанных Услуг соответствует предъявленным требованиям" }, 
-                                                new ActVariationsOfCompletion { Id = 2, Variation = "В результате осмотра результата оказанных Услуг недостатки не выявлены" },
-                                                          new ActVariationsOfCompletion { Id = 3, Variation = "В результате осмотра выявлены следующие недостатки" });
+                                                                new ActVariationsOfCompletion { Id = 2, Variation = "В результате осмотра результата оказанных Услуг недостатки не выявлены" },
+                                                                new ActVariationsOfCompletion { Id = 3, Variation = "В результате осмотра выявлены следующие недостатки" });
+            
             builder.Entity<RendedServicesVariations>().HasData(new RendedServicesVariations { Id = 1, RendedServiceName = "Головной - улица Багауддинова" },
-                                                new RendedServicesVariations { Id = 2, RendedServiceName = "Филиал в Душанбе - улица Ниёзи" },
-                                                          new RendedServicesVariations { Id = 3, RendedServiceName = "Филиал в Худжанде - улицу не помню" });
+                                                               new RendedServicesVariations { Id = 2, RendedServiceName = "Филиал в Душанбе - улица Ниёзи" },
+                                                               new RendedServicesVariations { Id = 3, RendedServiceName = "Филиал в Худжанде - улицу не помню" });
         } 
     }
 }

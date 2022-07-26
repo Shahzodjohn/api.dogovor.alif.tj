@@ -18,9 +18,6 @@ namespace api.dogovor.alif.tj.Controllers
             _userService = userService;
         }
 
-        /// <summary>
-        /// Registers User
-        /// </summary>
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterDTO dto)
         {
@@ -44,9 +41,7 @@ namespace api.dogovor.alif.tj.Controllers
         public async Task<IActionResult> CurrentUser()
         {
             var claim = User.Identity as ClaimsIdentity;
-            if (claim == null) return BadRequest(400);
-            var userInfo = await _userService.UsersInformation(claim);
-            return Ok(userInfo);
+            return claim == null ? NotFound() : Ok(await _userService.UsersInformation(claim)); 
         }
 
         [HttpPost("SendEmailMessage")]
@@ -56,12 +51,10 @@ namespace api.dogovor.alif.tj.Controllers
         }
 
         [HttpPost("VarifyUser")]
-        public ActionResult VerifyUser(RandomNumberDTO randpmNumberdto)
+        public async Task<IActionResult> VerifyUser(RandomNumberDTO randpmNumberdto)
         {
-            var UserEmail = _userService.VerifyUser(randpmNumberdto);
-
-            if (UserEmail.StatusCode == System.Net.HttpStatusCode.NotFound) { return BadRequest(UserEmail); };
-            return Ok(new Response { StatusCode = System.Net.HttpStatusCode.OK, Message = "Verification success!" });
+            var userEmail = await _userService.VerifyUser(randpmNumberdto);
+            return userEmail.StatusCode == System.Net.HttpStatusCode.NotFound ? BadRequest(userEmail) : Ok(userEmail);
         }
 
         [HttpPut("UpdatePassword")]

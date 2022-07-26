@@ -143,7 +143,6 @@ namespace Service.UserService
                 Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                PhoneNumber = user.PhoneNumber,
                 EmailAddress = user.EmailAddress,
                 RoleId = user.RoleId,
                 Role = role
@@ -177,8 +176,9 @@ namespace Service.UserService
                if(code == null)
                     return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest };
             }
-
-            string bodyContent = @$"<!DOCTYPE html>
+            string bodyContent;
+            #region Body Content
+            bodyContent = @$"<!DOCTYPE html>
 <html lang='en'>
 <head>
   <meta charset='UTF-8'>
@@ -230,22 +230,23 @@ namespace Service.UserService
   </table>
 </body>
 </html>";
+            #endregion
 
             var message = await _mailService.SendEmailAsync(new MailParameters { Subject = "Восстановление пароля", htmlBody = bodyContent, toEmail = Email });
 
             return message;
         }
-        public Response VerifyUser(RandomNumberDTO dto)
+        public async Task<Response> VerifyUser(RandomNumberDTO dto)
         {
             try
             {
-                var user = _uRepository.GetUserByEmailAndCode(dto);
+                var user = await _uRepository.GetUserByEmailAndCode(dto);
                 if (user == null)
                 {
                     LogProvider.GetInstance().Warning("User is null to get by email and code");
                     return new Response { StatusCode = System.Net.HttpStatusCode.NotFound, Message = "I cannot find the User, is he hiding somewhere?" };
                 }
-                return new Response { StatusCode = System.Net.HttpStatusCode.OK, Message = "Success!" };
+                return new Response { StatusCode = System.Net.HttpStatusCode.OK, Message = user.Message };
             }
             catch (Exception ex)
             {

@@ -16,7 +16,7 @@ namespace Repository
         public Task<UserCode> GetUserCodeCompared(string email);
         public Task<UserCode> InsertUserCode(string randomNumber, int UserId, DateTime date); 
         public Task UpdateCode(UserCode userCode, int NewCode);
-        public string GetUserByEmailAndCode(RandomNumberDTO dto);
+        public Task<Response> GetUserByEmailAndCode(RandomNumberDTO dto);
         public Task<Response> UpdateUsersPassword(NewPasswordDTO dto);
     }
 }

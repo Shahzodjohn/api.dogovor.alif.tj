@@ -20,26 +20,22 @@ namespace api.dogovor.alif.tj.Controllers
         public async Task<IActionResult> CreateSubCategory([FromForm] SubCategoryDTO dto)
         {
             var path = (Path.Combine(_webHostEnvironment.WebRootPath, $"{ DateTime.Today.ToString("D") }"));
-            var res = await _categoryAndSubCategoryServices.CreateSubCategory(dto, path);
-            return Ok(res);
+            var createSubCategory = await _categoryAndSubCategoryServices.CreateSubCategory(dto, path);
+            return createSubCategory.StatusCode == System.Net.HttpStatusCode.OK ? Ok(createSubCategory) : BadRequest(createSubCategory);
         }
 
         [HttpGet("GetSubcategory")]
         public async Task<IActionResult> GetSubcategory(int Id)
         {
             var subcategory = await _categoryAndSubCategoryServices.GetSubCategory(Id);
-            if (subcategory.StatusCode != System.Net.HttpStatusCode.OK)
-                return BadRequest(subcategory);
-            return Ok(subcategory);
+            return subcategory.StatusCode != System.Net.HttpStatusCode.OK ? BadRequest(subcategory) : Ok(subcategory);
         }
 
         [HttpPost("CreateCategory")]
         public async Task<IActionResult> CreateCategory(CategoryDTO categoryDto)
         {
             var category = await _categoryAndSubCategoryServices.CreateCategory(categoryDto);
-            if (category.StatusCode != System.Net.HttpStatusCode.OK)
-                return BadRequest(category);
-            return Ok(category.StatusCode);
+            return category.StatusCode == System.Net.HttpStatusCode.OK ? Ok(category) : BadRequest(category);
         }
         [HttpGet("GetFile")]
         public async Task<IActionResult> GetFile(int SubCategoryId)

@@ -98,8 +98,6 @@ namespace api.dogovor.alif.tj.Controllers
         //    return Ok(await _list.GetAgreementConcluder());
         //}
 
- 
-
 
         ///// <summary>
         ///// Договор заключает
