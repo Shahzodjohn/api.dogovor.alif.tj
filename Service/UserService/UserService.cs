@@ -27,16 +27,18 @@ namespace Service.UserService
                 if (dto.Password != dto.RepeatPassword)
                 {
                     LogProvider.GetInstance().Warning("400", "User not found!");
-                    return new Response { Status = "400", Message = "The password doesn't match with repeated one!" };
+                    return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = "The password doesn't match with repeated one!" };
                 }
                 if (/*!*/dto.EmailAddress.Contains("@team.alif.tj"))
                 {
                     LogProvider.GetInstance().Warning("Error while adding a user, please enter a valid email address!");
-                    return new Response { Status = "400", Message = "Error while adding a user, please enter a valid email address!" };
+                    return new Response { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = "Error while adding a user, please enter a valid email address!" };
                 }
                 else
                 {
-                    string bodyContent = @$"<!DOCTYPE html>
+                    string bodyContent;
+                    #region BodyContentString
+                    bodyContent = @$"<!DOCTYPE html>
 <html lang='en'>
 <head>
   <meta charset='UTF-8'>
@@ -94,6 +96,7 @@ namespace Service.UserService
   </table>
 </body>
 </html>";
+                    #endregion
                     var message = await _mailService.SendEmailAsync(new MailParameters { htmlBody = bodyContent, toEmail = dto.EmailAddress, Subject = "Параметры для входа в аккаунт" });
                     await _uRepository.InsertUser(dto);
                 }

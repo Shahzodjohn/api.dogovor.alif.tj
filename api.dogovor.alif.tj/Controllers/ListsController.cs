@@ -18,70 +18,73 @@ namespace api.dogovor.alif.tj.Controllers
             return Ok(await _list.GetAgent());
         }
 
-        [HttpGet("Agreement Concluder List")]
+        [HttpGet("AgreementConcluderList")]
         public async Task<IActionResult> GetAgreementConcluderList()
         {
             return Ok(await _list.GetAgreementConcluder());
         }
 
-        [HttpGet("Citizenship List")]
+        [HttpGet("CitizenshipList")]
         public async Task<IActionResult> CitizenshipList()
         {
             return Ok(await _list.GetCitizenship());
         }
 
-        [HttpGet("Cities List")]
+        [HttpGet("CitiesList")]
         public async Task<IActionResult> CitiesList()
         {
             return Ok(await _list.GetCityList());
         }
 
-        [HttpGet("Partial Payment Order List")]
+        [HttpGet("PartialPaymentOrderList")]
         public async Task<IActionResult> PartialPaymentOrderList()
         {
             return Ok(await _list.GetPartialPaymentOrder());
         }
 
-        [HttpGet("Passport Types List")]
+        [HttpGet("PassportTypesList")]
         public async Task<IActionResult> PassportTypesList()
         {
             return Ok(await _list.GetPassportTypes());
         }
 
-        [HttpGet("Payment Orders List")]
+        [HttpGet("PaymentOrdersList")]
         public async Task<IActionResult> GetPaymentOrdersList()
         {
             return Ok(await _list.GetPaymentOrder());
         }
 
-        [HttpGet("Rended Services Variations List")]
+        [HttpGet("RendedServicesVariationsList")]
         public async Task<IActionResult> GetRendedServicesVariationsList()
         {
             return Ok(await _list.GetRendedServicesVariations());
         }
 
-        [HttpGet("Service List")]
+        [HttpGet("ServiceList")]
         public async Task<IActionResult> GetServiceList()
         {
             return Ok(await _list.GetService());
         }
 
-        [HttpGet("Structural Subdivision List")]
+        [HttpGet("StructuralSubdivisionList")]
         public async Task<IActionResult> GetStructuralSubdivisionList()
         {
             return Ok(await _list.GetStructuralSubdivision());
         }
-        [HttpGet("Trustie Foundation List")]
+
+        [HttpGet("TrustieFoundationList")]
         public async Task<IActionResult> GetTrustieFoundationList()
         {
             return Ok(await _list.GetTrustieFoundation());
         }
-        [HttpGet("Act Variations of Completions List")]
+
+        [HttpGet("ActVariationsOfCompletionsList")]
         public async Task<IActionResult> GetActVariationsofCompletionsList()
         {
             return Ok(await _list.GetActVariationsOfCompletions());
         }
-        [HttpGet("Agreement Entities List")]
+
+        [HttpGet("AgreementEntitiesList")]
         public async Task<IActionResult> GetAgreementEntitiesList()
         {
             return Ok(await _list.GetAgreementEntities());

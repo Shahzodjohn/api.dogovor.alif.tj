@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.UserService;
 using System.Security.Claims;
-using ConnectionProvider.Context;
 using Domain.ReturnMessage;
 
 namespace api.dogovor.alif.tj.Controllers
@@ -25,10 +24,7 @@ namespace api.dogovor.alif.tj.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var returnMessage = await _userService.RegisterUser(dto);
-            if (returnMessage.Status == "400")
-                return BadRequest(returnMessage);
-            else
-                return Ok(returnMessage);
+            return returnMessage.StatusCode == System.Net.HttpStatusCode.BadRequest ? BadRequest(returnMessage) : Ok(returnMessage);
         }
         [HttpPost("Login")]
         public async Task<IActionResult> Login(AuthorizationDTO dto)
@@ -60,12 +56,12 @@ namespace api.dogovor.alif.tj.Controllers
             if (UserEmail.StatusCode == System.Net.HttpStatusCode.NotFound) { return BadRequest(UserEmail); };
             return Ok(new Response { StatusCode = System.Net.HttpStatusCode.OK, Message = "Verification success!" });
         }
+
         [HttpPut("UpdatePassword")]
         public async Task<ActionResult> ResetPassword(NewPasswordDTO dto)
         {
             var reset = await _userService.UpdateUserPassword(dto);
             return reset == null ? BadRequest(reset) : Ok(reset);
         }
-
     }
 }

@@ -27,12 +27,12 @@ namespace Service
                 await convert.SaveFilesAsync(path);
                 fileName = fileName.Replace("rtf", fileDto.format);
                 
-                DirectoryInfo di = new DirectoryInfo(path);
-                FileInfo[] files = di.GetFiles($"{fileDto.ContractName}.rtf")
+                var directoryInfo = new DirectoryInfo(path);
+                FileInfo[] files = directoryInfo.GetFiles($"{fileDto.ContractName}.rtf")
                                      .Where(p => p.Extension == ".rtf").ToArray();
 
                 await _archive.ArchivePost(new ArchiveDTO { ContractName = fileDto.ContractName, ExecutorsEmail = user.EmailAddress, 
-                                                            ExecutorsFullName = user.FirstName + " " + user.LastName,
+                                                            ExecutorsFullName = String.Concat(user.FirstName," ",user.LastName),
                                                             DocumentType = fileDto.DocumentName, FilePath = fileName });
 
                 LogProvider.GetInstance().Info( new Response { StatusCode = System.Net.HttpStatusCode.OK }.ToString(), "Successfull process!");

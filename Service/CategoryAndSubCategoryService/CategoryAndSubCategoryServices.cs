@@ -116,17 +116,18 @@ namespace Service.ContractServices
 
         public async Task<Response> ReceiveFinalText(TextDTO dto, string path)
         {
-            Mutex mutex = new Mutex();
+            var mutex = new Mutex();
             try
             {
                 mutex.WaitOne();
+
                 if (!System.IO.Directory.Exists(path))  
                     System.IO.Directory.CreateDirectory(path);
 
-                DirectoryInfo di = new DirectoryInfo(path);
-                FileInfo[] files = di.GetFiles($"{dto.ContractName}.rtf")
+                var directoryInfo = new DirectoryInfo(path);
+                FileInfo[] files = directoryInfo.GetFiles($"{dto.ContractName}.rtf")
                                      .Where(p => p.Extension == ".rtf").ToArray();
-                foreach (FileInfo file in files)
+                foreach (var file in files)
                     try
                     {
                         file.Attributes = FileAttributes.Normal;
@@ -142,10 +143,10 @@ namespace Service.ContractServices
                 if (System.IO.File.Exists(fileName))
                     System.IO.File.Delete(fileName);
 
-                FileStream fs = System.IO.File.Create(fileName);
-                    fs.Dispose();
+                var fileStream = System.IO.File.Create(fileName);
+                fileStream.Dispose();
 
-                using (StreamWriter writer = System.IO.File.AppendText(fileName))
+                using (var writer = System.IO.File.AppendText(fileName))
                     writer.WriteLine(dto.RTFtext);
 
                 System.IO.File.Move(fileName, Path.ChangeExtension(fileName, ".rtf"));

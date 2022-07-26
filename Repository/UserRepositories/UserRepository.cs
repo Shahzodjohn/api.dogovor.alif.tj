@@ -1,5 +1,4 @@
 ﻿using ConnectionProvider.Context;
-using Domain;
 using Domain.ReturnMessage;
 using Domain.TransferObjects;
 using Domain.User;
@@ -8,7 +7,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -98,7 +96,7 @@ namespace Repository
                 await _сontext.SaveChangesAsync();
                 return dataInsert;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
