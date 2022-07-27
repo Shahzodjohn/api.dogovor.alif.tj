@@ -1,11 +1,4 @@
-﻿using Domain;
-using Domain.ReturnMessage;
-using Domain.TransferObjects;
-using Domain.User;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Security.Claims;
-
-namespace Repository
+﻿namespace Repository
 {
     public interface IUserRepository
     {

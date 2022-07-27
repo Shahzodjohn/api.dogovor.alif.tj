@@ -1,8 +1,4 @@
-﻿using Domain.TransferObjects;
-using Microsoft.AspNetCore.Mvc;
-using Service.ContractServices;
-
-namespace api.dogovor.alif.tj.Controllers
+﻿namespace api.dogovor.alif.tj.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

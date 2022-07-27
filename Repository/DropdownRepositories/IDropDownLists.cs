@@ -1,7 +1,4 @@
-﻿using Domain.Entities;
-using Domain.TransferObjects;
-
-namespace Repository
+﻿namespace Repository
 {
     public interface IDropDownLists
     {

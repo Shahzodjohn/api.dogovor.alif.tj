@@ -1,11 +1,4 @@
-﻿using Domain.TransferObjects;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Service.UserService;
-using System.Security.Claims;
-using Domain.ReturnMessage;
-
-namespace api.dogovor.alif.tj.Controllers
+﻿namespace api.dogovor.alif.tj.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -24,7 +17,7 @@ namespace api.dogovor.alif.tj.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var returnMessage = await _userService.RegisterUser(dto);
-            return returnMessage.StatusCode == System.Net.HttpStatusCode.BadRequest ? BadRequest(returnMessage) : Ok(returnMessage);
+            return returnMessage.StatusCode == HttpStatusCode.BadRequest ? BadRequest(returnMessage) : Ok(returnMessage);
         }
 
         [HttpPost("Login")]
@@ -33,7 +26,7 @@ namespace api.dogovor.alif.tj.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
             var returnMessage = await _userService.Login(dto);
-            return returnMessage.StatusCode == System.Net.HttpStatusCode.BadRequest ? BadRequest(returnMessage) : Ok(returnMessage);
+            return returnMessage.StatusCode == HttpStatusCode.BadRequest ? BadRequest(returnMessage) : Ok(returnMessage);
         }
 
         [HttpGet("CurrentUser")]
@@ -54,7 +47,7 @@ namespace api.dogovor.alif.tj.Controllers
         public async Task<IActionResult> VerifyUser(RandomNumberDTO randpmNumberdto)
         {
             var userEmail = await _userService.VerifyUser(randpmNumberdto);
-            return userEmail.StatusCode == System.Net.HttpStatusCode.NotFound ? 
+            return userEmail.StatusCode == HttpStatusCode.NotFound ? 
                    BadRequest(userEmail) : Ok(userEmail);
         }
 

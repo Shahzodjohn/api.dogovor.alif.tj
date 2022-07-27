@@ -1,7 +1,4 @@
-﻿using IDropDownListService;
-using Microsoft.AspNetCore.Mvc;
-
-namespace api.dogovor.alif.tj.Controllers
+﻿namespace api.dogovor.alif.tj.Controllers
 {
     public class ListsController : ControllerBase
     {

@@ -1,14 +1,4 @@
-﻿using Domain.TransferObjects;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Repository.Email;
-using Service;
-using Service.UserService;
-using System.Net;
-using System.Security.Claims;
-
-namespace api.dogovor.alif.tj.Controllers
+﻿namespace api.dogovor.alif.tj.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

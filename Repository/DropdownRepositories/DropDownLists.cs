@@ -1,14 +1,4 @@
-﻿using ConnectionProvider.Context;
-using Domain.Entities;
-using Domain.TransferObjects;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Repository
+﻿namespace Repository
 {
     public class DropDownLists : IDropDownLists
     {
@@ -51,12 +41,11 @@ namespace Repository
 
         public async Task<PaymentOrderDTO> GetPaymentOrder()
         {
-            var paymentOrder = new PaymentOrderDTO
+            return new PaymentOrderDTO
             {
                  PaymentOrder = await _context.PaymentOrders.ToListAsync(),
                  PaymentTerm = await _context.PaymentTerms.ToListAsync()
             };
-            return paymentOrder;
         }
 
         public async Task<List<RendedServicesVariations>> GetRendedServicesVariations()

@@ -1,18 +1,4 @@
-﻿using ConnectionProvider.Context;
-using IDropDownListService;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Repository;
-using Repository.ArchievumRepositories;
-using Repository.Email;
-using Service;
-using Service.ContractServices;
-using Service.IDropDownListService;
-using Service.UserService;
-using System.Text;
-
-namespace api.dogovor.alif.tj.builder
+﻿namespace api.dogovor.alif.tj.builder
 {
     public static class ServiceBuilder
     {

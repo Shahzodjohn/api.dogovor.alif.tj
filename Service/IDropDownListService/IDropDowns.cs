@@ -1,12 +1,4 @@
-﻿using Domain.Entities;
-using Domain.TransferObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IDropDownListService
+﻿namespace IDropDownListService
 {
     public interface IDropDowns
     {

@@ -1,10 +1,4 @@
-﻿using Dapper;
-using Domain.Entities.Archivievum;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-using System.Data;
-
-namespace api.dogovor.alif.tj.Controllers
+﻿namespace api.dogovor.alif.tj.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

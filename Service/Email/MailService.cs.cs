@@ -1,18 +1,4 @@
-﻿using ConvertApiDotNet;
-using Domain.ReturnMessage;
-using Domain.TransferObjects;
-using MailKit.Net.Smtp;
-using MailKit.Security;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-using MimeKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Repository.Email
+﻿namespace Repository.Email
 {
     public class MailService : IMailService
     {

@@ -1,11 +1,4 @@
-﻿using api.dogovor.alif.tj.LogSettings;
-using Domain.Entities;
-using Domain.TransferObjects;
-using IDropDownListService;
-using Repository;
-
-
-namespace Service.IDropDownListService
+﻿namespace Service.IDropDownListService
 {
     public class DropDowns : IDropDowns
     {

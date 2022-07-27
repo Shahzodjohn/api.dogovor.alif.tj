@@ -1,10 +1,4 @@
-﻿using api.dogovor.alif.tj.LogSettings;
-using ConvertApiDotNet;
-using Domain.ContractChoice;
-using Domain.ReturnMessage;
-using Domain.TransferObjects;
-using Repository;
-namespace Service.ContractServices
+﻿namespace Service.ContractServices
 {
     public class CategoryAndSubCategoryServices : ICategoryAndSubCategoryServices
     {

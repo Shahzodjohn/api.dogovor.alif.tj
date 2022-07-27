@@ -1,16 +1,4 @@
-﻿using ConnectionProvider.Context;
-using Domain.ReturnMessage;
-using Domain.TransferObjects;
-using Domain.User;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-
-namespace Repository
+﻿namespace Repository
 {
     public class UserRepository : IUserRepository   
     {

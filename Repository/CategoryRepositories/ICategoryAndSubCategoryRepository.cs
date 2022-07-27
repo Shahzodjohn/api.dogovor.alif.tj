@@ -1,8 +1,4 @@
-﻿using Domain.ContractChoice;
-using Domain.TransferObjects;
-using Microsoft.AspNetCore.Http;
-
-namespace Repository
+﻿namespace Repository
 {
     public interface ICategoryAndSubCategoryRepository
     {

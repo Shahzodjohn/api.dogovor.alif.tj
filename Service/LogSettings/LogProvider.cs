@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using NLog;
-
-namespace api.dogovor.alif.tj.LogSettings
+﻿namespace api.dogovor.alif.tj.LogSettings
 {
     public class LogProvider : ILogProvider
     {

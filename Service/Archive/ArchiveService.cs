@@ -1,11 +1,4 @@
-﻿using api.dogovor.alif.tj.LogSettings;
-using ConvertApiDotNet;
-using Domain.ReturnMessage;
-using Domain.TransferObjects;
-using Domain.User;
-using Repository.ArchievumRepositories;
-
-namespace Service
+﻿namespace Service
 {
     public class ArchiveService : IArchiveService
     {

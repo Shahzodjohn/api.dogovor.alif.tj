@@ -1,13 +1,4 @@
-﻿using Domain.ReturnMessage;
-using Domain.TransferObjects;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Repository.Email
+﻿namespace Repository.Email
 {
     public interface IMailService
     {

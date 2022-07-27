@@ -1,7 +1,4 @@
-﻿using Domain.TransferObjects;
-using Domain.User;
-
-namespace Service
+﻿namespace Service
 {
     public interface IArchiveService
     {

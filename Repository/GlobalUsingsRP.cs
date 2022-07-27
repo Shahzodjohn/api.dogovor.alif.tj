@@ -1,0 +1,14 @@
+﻿global using ConnectionProvider.Context;
+global using Domain.ReturnMessage;
+global using Domain.TransferObjects;
+global using Domain.User;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.ChangeTracking;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.IdentityModel.Tokens;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Claims;
+global using System.Text;
+global using Domain.Entities;
+global using Domain.ContractChoice;
+global using Domain.Entities.Archivievum;
