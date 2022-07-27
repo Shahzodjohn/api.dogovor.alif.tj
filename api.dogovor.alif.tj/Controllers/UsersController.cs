@@ -45,16 +45,17 @@ namespace api.dogovor.alif.tj.Controllers
         }
 
         [HttpPost("SendEmailMessage")]
-        public async Task<IActionResult> SendEmailMessage(string Email)
+        public async Task<IActionResult> SendEmailMessage(string email)
         {
-            return Ok(await _userService.SendEmailCode(Email));
+            return Ok(await _userService.SendEmailCode(email));
         }
 
         [HttpPost("VarifyUser")]
         public async Task<IActionResult> VerifyUser(RandomNumberDTO randpmNumberdto)
         {
             var userEmail = await _userService.VerifyUser(randpmNumberdto);
-            return userEmail.StatusCode == System.Net.HttpStatusCode.NotFound ? BadRequest(userEmail) : Ok(userEmail);
+            return userEmail.StatusCode == System.Net.HttpStatusCode.NotFound ? 
+                   BadRequest(userEmail) : Ok(userEmail);
         }
 
         [HttpPut("UpdatePassword")]

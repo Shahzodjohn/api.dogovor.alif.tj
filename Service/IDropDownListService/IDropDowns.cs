@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.TransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace IDropDownListService
         public Task<List<PassportType>> GetPassportTypes();
         public Task<List<AgreementConcluder>> GetAgreementConcluder();
         public Task<List<Services>> GetService();
-        public Task<List<PaymentOrder>> GetPaymentOrder();
+        public Task<PaymentOrderDTO> GetPaymentOrder();   
         public Task<List<PartialPaymentOrder>> GetPartialPaymentOrder();
         public Task<List<Agent>> GetAgent();
         public Task<List<RendedServicesVariations>> GetRendedServicesVariations();

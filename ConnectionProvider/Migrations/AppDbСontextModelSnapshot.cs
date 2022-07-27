@@ -295,6 +295,28 @@ namespace ConnectionProvider.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PartialPaymentOrderNames");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PartialPaymentName = "Первый платеж в сомони"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PartialPaymentName = "Первый платеж в процентах"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            PartialPaymentName = "Второй платеж в сомони"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            PartialPaymentName = "Второй платеж в процентах"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.PassportType", b =>
@@ -336,6 +358,57 @@ namespace ConnectionProvider.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PaymentOrders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PaymentOrderName = "Налично"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PaymentOrderName = "Безналично"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.PaymentTerm", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("TermText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PaymentTerms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TermText = "Агар дар гуфтушунидҳо ба ҳамфикрӣ ноил нашаванд, баҳс бояд дар суди иқтисодии ш. Душанбе аз рӯи маҳалли воқеъ гардидани Исполнитель баррасӣ карда шавад."
+                        },
+                        new
+                        {
+                            Id = 2,
+                            TermText = "Агар дар гуфтушунидҳо ба ҳамфикрӣ ноил нашаванд, баҳс бояд дар суди иқтисодии ш. Хучанд аз рӯи маҳалли воқеъ гардидани Исполнитель баррасӣ карда шавад."
+                        },
+                        new
+                        {
+                            Id = 3,
+                            TermText = "Агар дар гуфтушунидҳо ба ҳамфикрӣ ноил нашаванд, баҳс бояд дар суди ш. Душанбе аз рӯи маҳалли воқеъ гардидани Исполнитель баррасӣ карда шавад."
+                        },
+                        new
+                        {
+                            Id = 4,
+                            TermText = "Агар дар гуфтушунидҳо ба ҳамфикрӣ ноил нашаванд, баҳс бояд дар суди ш. Хучанд аз рӯи маҳалли воқеъ гардидани Исполнитель баррасӣ карда шавад."
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.RendedServicesVariations", b =>

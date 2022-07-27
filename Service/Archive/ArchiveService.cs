@@ -28,6 +28,7 @@ namespace Service
                 fileName = fileName.Replace("rtf", fileDto.format);
                 
                 var directoryInfo = new DirectoryInfo(path);
+
                 //FileInfo[] files = directoryInfo.GetFiles($"{fileDto.ContractName}.rtf")
                 //                     .Where(p => p.Extension == ".rtf").ToArray();
 

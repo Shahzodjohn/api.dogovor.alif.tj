@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using ConnectionProvider.Context;
+﻿using ConnectionProvider.Context;
 using Domain.ReturnMessage;
 using Domain.TransferObjects;
 using Domain.User;
@@ -47,8 +46,7 @@ namespace Repository
         public async Task<string> JSONToken(User user)
         {
             var currentUser = await _сontext.Users.FirstOrDefaultAsync(x=>x.Id == user.Id);
-            //var userRoles = userDepartment.Id;
-            var authClaims = new List<Claim>
+                var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.EmailAddress),
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),

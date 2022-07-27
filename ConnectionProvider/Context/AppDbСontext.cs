@@ -31,9 +31,12 @@ namespace ConnectionProvider.Context
         public DbSet<ActVariationsOfCompletion> ActVariationsOfCompletions { get; set; }
         public DbSet<Archive> Archives { get; set; }
         public DbSet<UserCode> UserCodes { get; set; }
+        public DbSet<PaymentTerm> PaymentTerms { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
             builder.Entity<Role>().HasData(new Role { Id = 1, RoleName = "User"},
                                            new Role { Id = 2, RoleName = "Editor"},
                                            new Role { Id = 3, RoleName = "Admin"});
@@ -52,11 +55,14 @@ namespace ConnectionProvider.Context
             builder.Entity<AgreementConcluder>().HasData(new AgreementConcluder { Id = 1, ConcluderName = "Договор заключает головной офис" }, 
                                                          new AgreementConcluder { Id = 2, ConcluderName = "Договор заключает филиал Банка в г. Душанбе" }, 
                                                          new AgreementConcluder { Id = 3, ConcluderName = "Договор заключает филиал Банка в г. Худжанде" });
+            
             builder.Entity<AgreementEntity>().HasData(new AgreementEntity { Id = 1, EntityName = "Юридическое лицо" }, 
                                                       new AgreementEntity { Id = 2, EntityName = "Индивидуальный предприниматель" }, 
                                                       new AgreementEntity { Id = 3, EntityName = "Физическое лицо" });
+            
             builder.Entity<Services>().HasData(new Services { Id = 1, ServiceName = "Услуга указывается в самом договоре" }, 
                                                new Services {  Id = 2, ServiceName = "Услуга указывается в приложении к Договору" });
+            
             
             builder.Entity<Agent>().HasData(new Agent { Id = 1, AgentLocation = "Aгент находится в Душанбе " }, 
                                             new Agent { Id = 2, AgentLocation = "Агент находится в Худжанде" });
@@ -68,6 +74,21 @@ namespace ConnectionProvider.Context
             builder.Entity<RendedServicesVariations>().HasData(new RendedServicesVariations { Id = 1, RendedServiceName = "Головной - улица Багауддинова" },
                                                                new RendedServicesVariations { Id = 2, RendedServiceName = "Филиал в Душанбе - улица Ниёзи" },
                                                                new RendedServicesVariations { Id = 3, RendedServiceName = "Филиал в Худжанде - улицу не помню" });
+            
+            builder.Entity<PaymentTerm>().HasData(new PaymentTerm { Id = 1, TermText = "Агар дар гуфтушунидҳо ба ҳамфикрӣ ноил нашаванд, баҳс бояд дар суди иқтисодии ш. Душанбе аз рӯи маҳалли воқеъ гардидани Исполнитель баррасӣ карда шавад." },
+                                                  new PaymentTerm { Id = 2, TermText = "Агар дар гуфтушунидҳо ба ҳамфикрӣ ноил нашаванд, баҳс бояд дар суди иқтисодии ш. Хучанд аз рӯи маҳалли воқеъ гардидани Исполнитель баррасӣ карда шавад." },
+                                                  new PaymentTerm { Id = 3, TermText = "Агар дар гуфтушунидҳо ба ҳамфикрӣ ноил нашаванд, баҳс бояд дар суди ш. Душанбе аз рӯи маҳалли воқеъ гардидани Исполнитель баррасӣ карда шавад." },
+                                                  new PaymentTerm { Id = 4, TermText = "Агар дар гуфтушунидҳо ба ҳамфикрӣ ноил нашаванд, баҳс бояд дар суди ш. Хучанд аз рӯи маҳалли воқеъ гардидани Исполнитель баррасӣ карда шавад." });
+
+
+            builder.Entity<PaymentOrder>().HasData(new PaymentOrder { Id = 1, PaymentOrderName = "Налично" },
+                                                   new PaymentOrder { Id = 2, PaymentOrderName = "Безналично" });
+
+            builder.Entity<PartialPaymentOrder>().HasData(new PartialPaymentOrder { Id = 1, PartialPaymentName = "Первый платеж в сомони" },
+                                                          new PartialPaymentOrder { Id = 2, PartialPaymentName = "Первый платеж в процентах" },
+                                                          new PartialPaymentOrder { Id = 3, PartialPaymentName = "Второй платеж в сомони" },
+                                                          new PartialPaymentOrder { Id = 4, PartialPaymentName = "Второй платеж в процентах" });
+
         } 
     }
 }

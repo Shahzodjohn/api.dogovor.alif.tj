@@ -1,4 +1,6 @@
 ﻿using Domain.Entities;
+using Domain.TransferObjects;
+
 namespace Repository
 {
     public interface IDropDownLists
@@ -10,7 +12,7 @@ namespace Repository
         public Task<List<PassportType>> GetPassportType(); 
         public Task<List<AgreementConcluder>> GetAgreementConcluder(); 
         public Task<List<Services>> GetService(); 
-        public Task<List<PaymentOrder>> GetPaymentOrder(); 
+        public Task<PaymentOrderDTO> GetPaymentOrder(); 
         public Task<List<PartialPaymentOrder>> GetPartialPaymentOrder(); 
         public Task<List<Agent>> GetAgent(); 
         public Task<List<RendedServicesVariations>> GetRendedServicesVariations(); 

@@ -1,5 +1,6 @@
 ﻿using ConnectionProvider.Context;
 using Domain.Entities;
+using Domain.TransferObjects;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -48,9 +49,14 @@ namespace Repository
             return await _context.PartialPaymentOrderNames.ToListAsync();
         }
 
-        public async Task<List<PaymentOrder>> GetPaymentOrder()
+        public async Task<PaymentOrderDTO> GetPaymentOrder()
         {
-            return await _context.PaymentOrders.ToListAsync();
+            var paymentOrder = new PaymentOrderDTO
+            {
+                 PaymentOrder = await _context.PaymentOrders.ToListAsync(),
+                 PaymentTerm = await _context.PaymentTerms.ToListAsync()
+            };
+            return paymentOrder;
         }
 
         public async Task<List<RendedServicesVariations>> GetRendedServicesVariations()

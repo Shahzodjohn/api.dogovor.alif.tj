@@ -1,5 +1,6 @@
 ﻿using api.dogovor.alif.tj.LogSettings;
 using Domain.Entities;
+using Domain.TransferObjects;
 using IDropDownListService;
 using Repository;
 
@@ -105,20 +106,20 @@ namespace Service.IDropDownListService
             return lst;
         }
 
-        public async Task<List<PaymentOrder>> GetPaymentOrder()
+        public async Task<PaymentOrderDTO> GetPaymentOrder()
         {
-            var lst = new List<PaymentOrder>();
+            var paymentOrder = new PaymentOrderDTO();
             try
             {
-                lst = await _list.GetPaymentOrder();
+                paymentOrder = await _list.GetPaymentOrder();
                 LogProvider.GetInstance().Info(System.Net.HttpStatusCode.OK.ToString(), "Got the list of Agents");
             }
             catch (Exception ex)
             {
                 LogProvider.GetInstance().Error(System.Net.HttpStatusCode.BadRequest.ToString(), ex.Message.ToString());
             }
-            return lst;
-        }
+            return paymentOrder;
+        }   
 
         public async Task<List<RendedServicesVariations>> GetRendedServicesVariations()
         {
