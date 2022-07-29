@@ -17,8 +17,11 @@
             Services.AddScoped<IArchiveRepository, ArchiveRepository>();
             Services.AddScoped<IArchiveService, ArchiveService>();
             Services.AddScoped<IMailService, MailService>();
+            Services.AddAutoMapper(typeof(MapperProfile));
             Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
         }
+         //public static void ConfigureAutomapper(this IServiceCollection services) =>
+         //    services.AddAutoMapper(typeof(MapperProfile));
         public static void AddAuthentication(this IServiceCollection Services, WebApplicationBuilder builder)
         {
             Services.AddAuthentication(opt =>

@@ -22,3 +22,4 @@ global using System.Data;
 global using Microsoft.AspNetCore.Authorization;
 global using System.Security.Claims;
 global using System.Net;
+global using Repository.Mapper;

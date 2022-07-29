@@ -65,21 +65,31 @@
             return Ok(await _list.GetPaymentOrder());
         }
 
-        //[HttpGet("RendedServicesVariationsList")]
-        //public async Task<IActionResult> GetRendedServicesVariationsList()
-        //{
-        //    return Ok(await _list.GetRendedServicesVariations());
-        //}
+        [HttpGet("RendedServicesVariationsList")]
+        public async Task<IActionResult> GetRendedServicesVariationsList()
+        {
+            return Ok(await _list.GetRendedServicesVariations());
+        }
 
 
         /// <summary>
-        /// Укажите услуги
+        /// Предмет договора
         /// </summary>
         [HttpGet("ServiceList")]
         public async Task<IActionResult> GetServiceList()
         {
             return Ok(await _list.GetService());
         }
+
+        /// <summary>
+        /// Варианты результатов оказанных услуг
+        /// </summary>
+        [HttpGet("GetAgreementEntities")]
+        public async Task<IActionResult> GetAgreementEntities()
+        {
+            return Ok(await _list.GetAgreementEntities());
+        }
+
         /// <summary>
         /// О структурном подразделении Банка, которое заключает договор
         /// </summary>
